@@ -1907,39 +1907,11 @@
     </div>
 
     <div class="page full-img-page"><img src="https://jkimage.com/data/link/%EC%84%A4%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80/2026%20%EC%84%A4%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B802-2.png"></div>
-  
-  <div id="quotation-sidebar" style="position: fixed; top: 10px; right: 10px; width: 340px; background: #fff; border: 2px solid #8d705c; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 9999; font-family: 'Pretendard', sans-serif; display: flex; flex-direction: column; max-height: 90vh;">
-    <div style="background: #8d705c; color: white; padding: 15px; border-radius: 9px 9px 0 0; text-align: center;">
-        <h3 style="margin: 0; font-size: 18px;">📋 수량 선택 견적서</h3>
-    </div>
-    
-    <div id="quotation-list" style="padding: 15px; overflow-y: auto; flex-grow: 1; font-size: 13px;">
-        <p id="empty-msg" style="color: #999; text-align: center; padding: 20px 0;">상품을 클릭하면 담깁니다.</p>
-        <table style="width: 100%; border-collapse: collapse; display: none;" id="quote-table">
-            <thead>
-                <tr style="border-bottom: 2px solid #eee; text-align: left; font-size: 12px; color: #666;">
-                    <th style="padding: 8px 0;">상품명</th>
-                    <th style="text-align: center; width: 60px;">수량</th>
-                    <th style="text-align: right; width: 80px;">금액</th>
-                </tr>
-            </thead>
-            <tbody id="quote-body"></tbody>
-        </table>
-    </div>
-
-    <div style="padding: 15px; background: #f9f9f9; border-top: 1px solid #eee; border-radius: 0 0 12px 12px;">
-        <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 18px; margin-bottom: 10px;">
-            <span>총 견적액</span>
-            <span style="color: #b33939;"><span id="total-price-display">0</span>원</span>
-        </div>
-        <button onclick="copyToClipboard()" style="width: 100%; background: #8d705c; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 700;">견적 내역 복사하기</button>
-    </div>
-</div>
 
 <script>
     let basket = {}; 
 
-    // 상품 추가 함수
+    // 1. 상품 추가/관리 기능 통합
     function addItem(name, price) {
         if (basket[name]) {
             basket[name].count++;
@@ -1949,14 +1921,14 @@
         renderQuote();
     }
 
-    // 수량 조절 함수
     function changeCount(name, delta) {
+        if (!basket[name]) return;
         basket[name].count += delta;
         if (basket[name].count <= 0) delete basket[name];
         renderQuote();
     }
 
-    // 견적서 렌더링
+    // 2. 견적서 화면 업데이트
     function renderQuote() {
         const body = document.getElementById('quote-body');
         const table = document.getElementById('quote-table');
@@ -2002,7 +1974,7 @@
         document.getElementById('total-price-display').innerText = total.toLocaleString();
     }
 
-    // 클립보드 복사
+    // 3. 견적 내역 복사 기능
     function copyToClipboard() {
         const keys = Object.keys(basket);
         if (keys.length === 0) return alert("선택된 상품이 없습니다.");
@@ -2026,18 +1998,21 @@
         alert("견적 내역이 복사되었습니다!");
     }
 
-    // [핵심] 이벤트 리스너 중복 방지를 위한 초기화 및 등록 함수
-    function initProductEvents() {
+    // 4. [중요] 이벤트 리스너 중복 등록 방지 로직
+    function initProductClicks() {
         const productBoxes = document.querySelectorAll('.grid-box, .hero-item');
         productBoxes.forEach(box => {
             box.style.cursor = 'pointer';
-            // 기존에 걸려있을지 모르는 이벤트를 완전히 제거하고 새로 등록
-            box.onclick = function() {
+            
+            // 기존에 등록된 onclick이 있다면 제거하고 새로 등록 (중복 방지 핵심)
+            box.onclick = function(e) {
+                // 클릭한 요소가 버튼(+,-)인 경우 상품 추가 방지
+                if (e.target.tagName === 'BUTTON') return;
+
                 const nameEl = this.querySelector('.line-2');
                 const priceEl = this.querySelector('.current-prc');
                 
                 if (nameEl && priceEl) {
-                    // 상품명에서 불필요한 공백 및 줄바꿈 제거
                     const name = nameEl.innerText.split('\n')[0].trim();
                     const price = parseInt(priceEl.innerText.replace(/,/g, ''));
                     addItem(name, price);
@@ -2046,11 +2021,16 @@
         });
     }
 
-    // 페이지 로드 시 한 번만 실행
-    window.addEventListener('DOMContentLoaded', initProductEvents);
+    // 페이지 로드 완료 시 단 한 번만 실행
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initProductClicks);
+    } else {
+        initProductClicks();
+    }
 </script>
     
 </body>
 
 </html>
+
 
