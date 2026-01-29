@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>2026 설 선물 카탈로그</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root { --brand: #8d705c; --red: #b33939; --gray: #999; }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
+        
+        body { margin: 0; padding: 0; background: #eee; font-family: 'Pretendard', sans-serif; letter-spacing: -0.5px; }
+
+        /* [핵심 수정 1] 인쇄 시 브라우저 기본 여백 제거 */
+        @page { size: A4; margin: 0; }
+
+        /* [핵심 수정 2] 화면(Screen)에서 보이는 스타일 */
+        .page { 
+            width: 210mm; height: 297mm; 
+            padding: 15mm 20mm; 
+            margin: 10mm auto; 
+            background: #fff; 
+            position: relative; 
+            overflow: hidden; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 화면에서만 그림자 */
+        }
+
+        /* [핵심 수정 3] 인쇄(Print) 전용 스타일 */
+        @media print {
+            body { margin: 0; background: #fff; }
+            .page {
+                margin: 0; /* 인쇄 시 페이지 간 여백 제거 */
+                border: none; /* 테두리 제거 */
+                width: 210mm; /* A4 폭 고정 */
+                height: 297mm; /* A4 높이 고정 */
+                box-shadow: none;
+                page-break-after: always; /* 페이지 강제 나눔 */
+                page-break-inside: avoid; /* 내용 중간 절단 방지 */
+            }
+        }
+
+        .full-img-page { padding: 0 !important; }
+        .full-img-page img { width: 100%; height: 100%; object-fit: fill; }
+        
+        /* --- 목차(Contents) 페이지 스타일 수정 시작 --- */
+        
+        /* [수정] 상단 패딩을 30mm -> 10mm로 줄여서 내용을 위로 올림 */
+        .contents-page { 
+            padding: 10mm 20mm; 
+            text-align: center; 
+        }
+        
+        .contents-title { 
+            font-size: 40px; font-weight: 800; color: var(--brand); margin-bottom: 50px;
+            border-bottom: 3px solid var(--brand); display: inline-block; padding-bottom: 10px; 
+            margin-top: 10px; /* 타이틀 미세 조정 */
+        }
+        
+        /* [수정] 목차 리스트 스타일: 크기 확대 및 간격 조정 */
+        .contents-list { 
+            list-style: none;
+            padding: 0; 
+            text-align: left; 
+            max-width: 620px; 
+            margin: 0 auto; 
+        }
+        .contents-item { 
+            display: flex;
+            justify-content: space-between; 
+            font-size: 26px; /* 글자 크기 확대 */
+            margin-bottom: 28px; 
+            border-bottom: 1px dotted #ccc; 
+            padding-bottom: 8px; 
+            color: #333;
+            font-weight: 600; 
+        }
+
+        /* [수정] 하단 안내 박스 위치 조정 */
+        .guide-box {
+            max-width: 600px;
+            margin: 50px auto 0; /* 간격 살짝 조정 */
+            padding: 30px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .guide-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--brand);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .guide-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #555;
+            margin: 0;
+        }
+        .guide-text ul { padding-left: 20px; margin: 0; }
+        .guide-text strong { color: #222; font-weight: 700; }
+        
+        .guide-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+            border-top: 1px dashed #ccc;
+            padding-top: 20px;
+        }
+        .info-item .label {
+            display: block; font-size: 13px; color: #888; margin-bottom: 4px;
+        }
+        .info-item .val {
+            font-size: 16px; font-weight: 700; color: #333;
+        }
+        /* --- 목차(Contents) 페이지 스타일 수정 끝 --- */
+        
+        .section-header { margin-bottom: 12px; border-bottom: 2.5px solid var(--brand); padding-bottom: 8px; }
+        .cat-name { font-size: 24px; font-weight: 800; color: var(--brand); }
+
+        .hero-banner { width: 100%; height: 280px; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
+        .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-list { display: flex; flex-direction: column; gap: 20px; }
+        .hero-item { display: flex; gap: 30px; height: 260px; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .hero-item .img-box { width: 260px; height: 260px; border: 1px solid #eee; flex-shrink: 0; }
+        .hero-item .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 30px; margin-top: 5px; }
+        .grid-box { display: flex; flex-direction: column; }
+        .grid-box .img-box { width: 100%; aspect-ratio: 1 / 1; border: 1px solid #eee; margin-bottom: 8px; }
+        .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .info { text-align: left; display: flex; flex-direction: column; gap: 2px; }
+        .line-1 { font-size: 13px; font-weight: 600; color: var(--brand); display: flex; gap: 6px; } 
+        .line-1 .num { color: #000; font-weight: 800; }
+        .line-1 .origin { color: #999; font-weight: 400; }
+        
+        .hero-item .line-2 { font-size: 18px; font-weight: 800; color: #111; line-height: 1.3; margin: 2px 0; }
+        .grid-box .line-2 { font-size: 18px; font-weight: 800; color: #111; line-height: 1.25; min-height: 46px; display: flex; align-items: center; overflow: hidden; margin: 1px 0; }
+        
+        .line-3 { display: flex; align-items: baseline; gap: 8px; }
+        .original-prc { font-size: 15px; color: var(--gray); text-decoration: line-through; }
+        .current-prc { font-size: 24px; font-weight: 900; color: var(--red); }
+        .discount-rate { font-size: 19px; font-weight: 800; color: #d35400; }
+        .line-4 { font-size: 11px; color: #666; border-top: 1px solid #f5f5f5; padding-top: 5px; min-height: 32px; height: auto; line-height: 1.35; overflow: visible; word-break: keep-all; }
+
+        .page-no { position: absolute; bottom: 10mm; right: 10mm; font-weight: bold; color: var(--brand); }
+    </style>
+</head>
+<body>
+
+    <div class="page full-img-page"><img src="https://jkimage.com/data/link/%EC%84%A4%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80/2026%20%EC%84%A4%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B802-1.png"></div>
+
+    <div class="page contents-page">
+        <div class="contents-title">CONTENTS</div>
+        
+        <ul class="contents-list">
+            <li class="contents-item"><span>01 과일</span>   <span>03</span></li>
+            <li class="contents-item"><span>02 정육</span>   <span>08</span></li>
+            <li class="contents-item"><span>03 가공식품</span>   <span>13</span></li>
+            <li class="contents-item"><span>04 수산물</span>   <span>19</span></li>
+            <li class="contents-item"><span>05 김</span>   <span>23</span></li>
+            <li class="contents-item"><span>06 건강식품</span>   <span>26</span></li>
+            <li class="contents-item"><span>07 오일/조미료</span>   <span>29</span></li>
+            <li class="contents-item"><span>08 견과/버섯/잡곡</span>   <span>32</span></li>
+        </ul>
+
+        <div class="guide-box">
+            <div class="guide-title">📢 주문 및 배송 안내</div>
+            <div class="guide-text">
+                <ul>
+                    <li><strong>주문 마감 :</strong> 2026년 02월 06일 (금) 오후 5시까지</li>
+                    <li><strong>택배비 :</strong> 전 제품 무료 배송기준 가격입니다.</li>
+                    <li>택배사의 사정에 따라 배송이 1~2일 지연될 수 있습니다.</li>
+                    <li>신선식품 특성상 단순 변심으로 인한 교환/환불은 불가합니다.</li>
+                </ul>
+            </div>
+            
+            <div class="guide-info-grid">
+                <div class="info-item">
+                    <span class="label">주문 문의 (전화)</span>
+                    <span class="val">02-6951-4775</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">입금 계좌 안내</span>
+                    <span class="val">KB국민은행 792601-00-074606</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-no">02</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">01 과일</span></div>
+        <div class="hero-banner"><img src="https://jkimage.com/data/link/%EC%84%A4%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%83%88%20%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC/%EA%B3%BC%EC%9D%BC.png"></div>
+        <div class="hero-list">
+            <div class="hero-item">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2023/600/jeju_chunhehyang_600.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">3-1</span> [제주愛귤] <span class="origin">국내산(제주)</span></div>
+                    <div class="line-2">[제주愛귤] 제주직송 천혜향 선물세트<br>[2kg/8-12과]</div>
+                    <div class="line-3"><span class="original-prc">52,600</span><span class="current-prc">29,000</span><span class="discount-rate">45%</span></div>
+                    <div class="line-4">구성: 2kg/8~12과</div>
+                </div>
+            </div>
+            <div class="hero-item">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/2025tangor/chenhaehyang_middle_th.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">3-2</span> [제주금과] <span class="origin">제주 서귀포</span></div>
+                    <div class="line-2">[제주금과] 천혜향선물세트 2.5kg내외<br>(중과11-14과)</div>
+                    <div class="line-3"><span class="original-prc">58,000</span><span class="current-prc">32,000</span><span class="discount-rate">45%</span></div>
+                    <div class="line-4">구성: 중과 11-14과</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">03</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">01 과일</span></div>
+        <div class="grid-container">
+            <div class="grid-box"><div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/sani_gotgam_07_500.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">4-1</span> [산이곶감] <span class="origin">경북상주</span></div><div class="line-2">[산이곶감] 백두대간 고품격 산이곶감 8호</div><div class="line-3"><span class="original-prc">82,500</span><span class="current-prc">36,000</span><span class="discount-rate">56%</span></div><div class="line-4">구성: 건시 24개</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="https://gi.esmplus.com/gfarm0416/5kg_8.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">4-2</span> [웰빙나주배] <span class="origin">국내(나주)</span></div><div class="line-2">[웰빙나주배] 나주 신고배 선물세트 5kg</div><div class="line-3"><span class="original-prc">60,000</span><span class="current-prc">38,000</span><span class="discount-rate">37%</span></div><div class="line-4">구성: 7-8과</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="http://spng1.cafe24.com/gift/2022/600/SJGG_PMbangunsi_VVIP10_600.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">4-3</span> [상주자연골드] <span class="origin">국내산/상주</span></div><div class="line-2">[상주자연골드곶감] 반건시 VVIP 10호</div><div class="line-3"><span class="original-prc">94,250</span><span class="current-prc">41,000</span><span class="discount-rate">57%</span></div><div class="line-4">구성: 1.2kg미만/30입</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="http://spng1.cafe24.com/gift/2022/600/SJGG_PMbangunsi_VVIP12_600.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">4-4</span> [상주자연골드] <span class="origin">국내산/상주</span></div><div class="line-2">[상주자연골드곶감] 반건시 VVIP 12호</div><div class="line-3"><span class="original-prc">101,500</span><span class="current-prc">44,000</span><span class="discount-rate">57%</span></div><div class="line-4">구성: 1.4kg미만/20입</div></div></div>
+        </div>
+        <div class="page-no">04</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">01 과일</span></div>
+        <div class="grid-container">
+            <div class="grid-box"><div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/mgjeju03_600.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">5-1</span> [제주愛귤] <span class="origin">국내산(제주)</span></div><div class="line-2">[제주愛귤] 제주직송 혼합과일<br>(천혜향/레드향)</div><div class="line-3"><span class="original-prc">84,200</span><span class="current-prc">46,000</span><span class="discount-rate">45%</span></div><div class="line-4">구성: 3kg/8~12과/2종혼합</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="https://gntglobal.hgodo.com/gnt/img/404/SUM_1000_3.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">5-2</span> [명인예담] <span class="origin">국내산</span></div><div class="line-2">[명인예담] 명품 사과 선물세트(9과)</div><div class="line-3"><span class="original-prc">115,000</span><span class="current-prc">46,000</span><span class="discount-rate">60%</span></div><div class="line-4">구성: 사과 9과(3kg내외)</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="https://gi.esmplus.com/gfarm0416/75kg_11.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">5-3</span> [웰빙나주배] <span class="origin">국내(나주)</span></div><div class="line-2">[웰빙나주배] 나주 신고배 선물세트 7.5kg</div><div class="line-3"><span class="original-prc">85,000</span><span class="current-prc">51,000</span><span class="discount-rate">40%</span></div><div class="line-4">구성: 11-13과</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="https://luce21.diskn.com/etc_01/2025tangor/chenhaehyang_versus2_th.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">5-4</span> [제주금과] <span class="origin">제주 서귀포</span></div><div class="line-2">[제주금과] 천혜향선물세트 4.5kg내외</div><div class="line-3"><span class="original-prc">106,000</span><span class="current-prc">58,000</span><span class="discount-rate">45%</span></div><div class="line-4">구성: 대과 10-18과</div></div></div>
+        </div>
+        <div class="page-no">05</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">01 과일</span></div>
+        <div class="grid-container">
+            <div class="grid-box"><div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/sani_gotgam_04_500.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">6-1</span> [산이곶감] <span class="origin">경북상주</span></div><div class="line-2">[산이곶감] 백두대간 고품격 산이곶감 3호</div><div class="line-3"><span class="original-prc">147,250</span><span class="current-prc">64,000</span><span class="discount-rate">57%</span></div><div class="line-4">구성: 반건시10+건시12+호두말이18~20</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/MP_teuck_apple-pear2_600.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">6-2</span> [名品] <span class="origin">국내산</span></div><div class="line-2">[名品] 특선 사과,배 혼합과일세트 2호</div><div class="line-3"><span class="original-prc">244,800</span><span class="current-prc">67,000</span><span class="discount-rate">73%</span></div><div class="line-4">구성: 사과6+배6(총5kg)</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="http://spng1.cafe24.com/gift/2021/500/MP_teuck_apple-pear_600.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">6-3</span> [名品] <span class="origin">국내산</span></div><div class="line-2">[名品] 특선 사과,배 혼합과일세트 1호</div><div class="line-3"><span class="original-prc">255,600</span><span class="current-prc">69,000</span><span class="discount-rate">73%</span></div><div class="line-4">구성: 사과8+배4(총4.5kg)</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="http://faps.mycafe24.com/gift/2026/600/JYMJ_S31.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">6-4</span> [굿씨드] <span class="origin">국내산외</span></div><div class="line-2">[굿씨드] 프리미엄 제철과일 5종 세트 1호</div><div class="line-3"><span class="original-prc">178,250</span><span class="current-prc">78,000</span><span class="discount-rate">56%</span></div><div class="line-4">구성: 사과2+망고2+키위4+용과2+한라봉3</div></div></div>
+        </div>
+        <div class="page-no">06</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">01 과일</span></div>
+        <div class="grid-container">
+            <div class="grid-box"><div class="img-box"><img src="http://faps.mycafe24.com/gift/2026/600/JYMJ_S32.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">7-1</span> [굿씨드] <span class="origin">국내산외</span></div><div class="line-2">[굿씨드] 프리미엄 제철과일 5종 세트 2호</div><div class="line-3"><span class="original-prc">185,500</span><span class="current-prc">81,000</span><span class="discount-rate">56%</span></div><div class="line-4">구성: 사과2+망고2+애플망고1+용과2+한라봉4</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="http://spng1.cafe24.com/gift/2021/500/MP_premium_apple-pear2_600.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">7-2</span> [名品] <span class="origin">국내산</span></div><div class="line-2">[名品] 프리미엄 사과,배 혼합세트 2호</div><div class="line-3"><span class="original-prc">312,800</span><span class="current-prc">85,000</span><span class="discount-rate">73%</span></div><div class="line-4">구성: 사과6+배6(총5.8kg)</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="http://faps.mycafe24.com/gift/2026/600/JYMJ_S33.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">7-3</span> [굿씨드] <span class="origin">국내산외</span></div><div class="line-2">[굿씨드] 프리미엄 제철과일 5종 세트 3호</div><div class="line-3"><span class="original-prc">202,000</span><span class="current-prc">88,000</span><span class="discount-rate">56%</span></div><div class="line-4">구성: 샤인1+망고2+애플망고2+사과2+용과2</div></div></div>
+            <div class="grid-box"><div class="img-box"><img src="http://psfa.cafe24.com/gift/2025/600/MP_premium_S07.jpg"></div>
+                <div class="info"><div class="line-1"><span class="num">7-4</span> [名品] <span class="origin">국내산외</span></div><div class="line-2">[名品] 프리미엄 망고/한라봉 혼합세트</div><div class="line-3"><span class="original-prc">169,000</span><span class="current-prc">95,000</span><span class="discount-rate">44%</span></div><div class="line-4">구성: 망고3+애플망고3+한라봉3+레드향3</div></div></div>
+        </div>
+        <div class="page-no">07</div>
+    </div>
+
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>2026 설 선물 카탈로그 - 정육</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root { --brand: #8d705c; --red: #b33939; --gray: #999; }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
+        body { margin: 0; padding: 0; background: #eee; font-family: 'Pretendard', sans-serif; letter-spacing: -0.5px; }
+        @page { size: A4; margin: 0; }
+        .page { width: 210mm; height: 297mm; padding: 15mm 20mm; margin: 10mm auto; background: #fff; position: relative; page-break-after: always; display: flex; flex-direction: column; overflow: hidden; }
+        
+        .section-header { margin-bottom: 12px; border-bottom: 2.5px solid var(--brand); padding-bottom: 8px; }
+        .cat-name { font-size: 24px; font-weight: 800; color: var(--brand); }
+
+        /* Hero (첫 페이지) 스타일 */
+        .hero-banner { width: 100%; height: 280px; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
+        .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-list { display: flex; flex-direction: column; gap: 20px; }
+        .hero-item { display: flex; gap: 30px; height: 260px; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .hero-item .img-box { width: 260px; height: 260px; border: 1px solid #eee; flex-shrink: 0; }
+        .hero-item .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* Grid (나머지 페이지) 스타일 */
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 30px; margin-top: 5px; }
+        .grid-box { display: flex; flex-direction: column; }
+        .grid-box .img-box { width: 100%; aspect-ratio: 1 / 1; border: 1px solid #eee; margin-bottom: 8px; }
+        .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .info { text-align: left; display: flex; flex-direction: column; gap: 2px; }
+        .line-1 { font-size: 13px; font-weight: 600; color: var(--brand); display: flex; gap: 6px; } 
+        .line-1 .num { color: #000; font-weight: 800; }
+        .line-1 .origin { color: #999; font-weight: 400; }
+        
+        /* 상품명 스타일: 두 줄 정렬 최적화 */
+        .hero-item .line-2 { font-size: 18px; font-weight: 800; color: #111; line-height: 1.3; margin: 2px 0; }
+        .grid-box .line-2 { 
+            font-size: 18px; 
+            font-weight: 800; 
+            color: #111; 
+            line-height: 1.25; 
+            min-height: 46px; /* 두 줄 높이 확보 */
+            display: flex;
+            align-items: center; 
+            overflow: hidden; 
+            margin: 1px 0; 
+        }
+        
+        .line-3 { display: flex; align-items: baseline; gap: 8px; }
+        .original-prc { font-size: 15px; color: var(--gray); text-decoration: line-through; }
+        .current-prc { font-size: 24px; font-weight: 900; color: var(--red); }
+        .discount-rate { font-size: 19px; font-weight: 800; color: #d35400; }
+        .line-4 { font-size: 11px; color: #666; border-top: 1px solid #f5f5f5; padding-top: 5px; min-height: 32px; height: auto; line-height: 1.35; overflow: visible; word-break: keep-all; }
+
+        .page-no { position: absolute; bottom: 10mm; right: 10mm; font-weight: bold; color: var(--brand); }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">02 정육</span></div>
+        <div class="hero-banner"><img src="https://jkimage.com/data/link/%EC%84%A4%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%83%88%20%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC/%EC%A0%95%EC%9C%A1.png"></div>
+        <div class="hero-list">
+            <div class="hero-item">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2025/600/adh02S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">8-1</span> [안동양반골한우] <span class="origin">국내산</span></div>
+                    <div class="line-2">[안동양반골한우] 국내산 한우(1등급) 선물세트<br>[600g/불국장]</div>
+                    <div class="line-3"><span class="original-prc">79,000</span><span class="current-prc">45,000</span><span class="discount-rate">43%</span></div>
+                    <div class="line-4">구성: 불고기200g, 국거리200g, 장조림200g</div>
+                </div>
+            </div>
+            <div class="hero-item">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2025/600/adh03S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">8-2</span> [안동양반골한우] <span class="origin">국내산</span></div>
+                    <div class="line-2">[안동양반골한우] 국내산 한우(1등급) 선물세트<br>[900g/불국장]</div>
+                    <div class="line-3"><span class="original-prc">79,000</span><span class="current-prc">61,000</span><span class="discount-rate">23%</span></div>
+                    <div class="line-4">구성: 불고기300g, 국거리300g, 장조림300g</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">08</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">02 정육</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/hyanggawon/hynggawon_9deangbulguk300_main.png"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">9-1</span> [향가원] <span class="origin">국내산</span></div>
+                    <div class="line-2">[향가원] 1등급한우 구이정육<br>혼합선물세트9호 900g(300g*3ea)</div>
+                    <div class="line-3"><span class="original-prc">97,000</span><span class="current-prc">68,000</span><span class="discount-rate">30%</span></div>
+                    <div class="line-4">구성: 등심300g+불고기300g+국거리300g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/andong04_600.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">9-2</span> [안동양반골한우] <span class="origin">국내산</span></div>
+                    <div class="line-2">[안동양반골한우] 국내산 한우(1등급)<br>선물세트 [1.2kg/불불국]</div>
+                    <div class="line-3"><span class="original-prc">79,000</span><span class="current-prc">73,000</span><span class="discount-rate">8%</span></div>
+                    <div class="line-4">구성: 불고기400g×2팩, 국거리400g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/hyanggawon/hynggawon_7deangteakgal300_main.png"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">9-3</span> [향가원] <span class="origin">국내산</span></div>
+                    <div class="line-2">[향가원] 1등급한우<br>구이선물세트7호 900g(300g*3ea)</div>
+                    <div class="line-3"><span class="original-prc">135,000</span><span class="current-prc">93,000</span><span class="discount-rate">31%</span></div>
+                    <div class="line-4">구성: 등심300g+특수부위300g+채끝300g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/hyanggawon/hynggawon_4denggalbulguksan300_main.png"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">9-4</span> [향가원] <span class="origin">국내산</span></div>
+                    <div class="line-2">[향가원] 1등급한우 구이정육<br>혼합선물세트4호 1.5kg(300g*5ea)</div>
+                    <div class="line-3"><span class="original-prc">140,000</span><span class="current-prc">100,000</span><span class="discount-rate">29%</span></div>
+                    <div class="line-4">구성: 등심+갈비+불고기+국거리+산적 각300g</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">09</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">02 정육</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/hyanggawon/hynggawon_12dengdengbulguk400_main.png"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">10-1</span> [향가원] <span class="origin">국내산</span></div>
+                    <div class="line-2">[향가원] 1등급한우 구이정육<br>혼합선물세트 12호 1.6kg(400g*4ea)</div>
+                    <div class="line-3"><span class="original-prc">156,000</span><span class="current-prc">109,000</span><span class="discount-rate">30%</span></div>
+                    <div class="line-4">구성: 등심400g×2팩+불고기400g+국거리400g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/hyanggawon/hynggawon_3dengchebugal300_main.png"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">10-2</span> [향가원] <span class="origin">국내산</span></div>
+                    <div class="line-2">[향가원] 1등급한우<br>구이선물세트3호 1.2kg(300g*4ea)</div>
+                    <div class="line-3"><span class="original-prc">167,000</span><span class="current-prc">113,000</span><span class="discount-rate">32%</span></div>
+                    <div class="line-4">구성: 등심+채끝+특수부위+갈비살 각300g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/Andongcow/26S_Andong_add/17_Andong_kuisil_NO13_1300g_main.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">10-3</span> [안동바른한우] <span class="origin">국내산</span></div>
+                    <div class="line-2">[안동바른한우] 1등급 한우 구이<br>실속 선물세트13호 1.3kg</div>
+                    <div class="line-3"><span class="original-prc">270,000</span><span class="current-prc">116,000</span><span class="discount-rate">57%</span></div>
+                    <div class="line-4">구성: 등심200g+채끝200g+특수300g+불고기300g×2팩</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/hyanggawon/hynggawon_15dengchaeteakgal400_main.png"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">10-4</span> [향가원] <span class="origin">국내산</span></div>
+                    <div class="line-2">[향가원] 1등급한우<br>구이선물세트 15호 1.6kg(400g*4ea)</div>
+                    <div class="line-3"><span class="original-prc">200,000</span><span class="current-prc">142,000</span><span class="discount-rate">29%</span></div>
+                    <div class="line-4">구성: 등심+채끝+특수부위+갈비살 각400g</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">10</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">02 정육</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://shop-phinf.pstatic.net/20260107_163/1767763071943QQesp_JPEG/49835852992917536_2004389991.jpg?type=m1000_pd"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">11-1</span> [본우담] <span class="origin">미국산</span></div>
+                    <div class="line-2">[본우담] 명품 LA갈비<br>1.5kg 탑초이스</div>
+                    <div class="line-3"><span class="original-prc">115,000</span><span class="current-prc">63,000</span><span class="discount-rate">45%</span></div>
+                    <div class="line-4">구성: LA갈비 1.5kg</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/2024/600/SDH_04S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">11-2</span> [동화정육] <span class="origin">미국산</span></div>
+                    <div class="line-2">[동화정육] 미국산 초이스등급<br>LA갈비 선물세트 1.6kg</div>
+                    <div class="line-3"><span class="original-prc">120,000</span><span class="current-prc">81,000</span><span class="discount-rate">32%</span></div>
+                    <div class="line-4">구성: LA갈비 1.6kg</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://shop-phinf.pstatic.net/20260107_216/1767765840706PzN4C_JPEG/43383897145205075_1342474240.jpg?type=m1000_pd"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">11-3</span> [본우담] <span class="origin">미국산</span></div>
+                    <div class="line-2">[본우담] 명품 LA갈비<br>2.5kg 탑초이스</div>
+                    <div class="line-3"><span class="original-prc">158,000</span><span class="current-prc">96,000</span><span class="discount-rate">39%</span></div>
+                    <div class="line-4">구성: LA갈비 2.5kg</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/2024/600/SDH_05S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">11-4</span> [동화정육] <span class="origin">미국산</span></div>
+                    <div class="line-2">[동화정육] 미국산 초이스등급<br>LA갈비 선물세트 2kg</div>
+                    <div class="line-3"><span class="original-prc">150,000</span><span class="current-prc">102,000</span><span class="discount-rate">32%</span></div>
+                    <div class="line-4">구성: LA갈비 2kg</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">11</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">02 정육</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/2024/600/SDH_01S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">12-1</span> [동화정육] <span class="origin">국내산</span></div>
+                    <div class="line-2">[동화정육] 보성녹돈 한돈 바베큐 1호<br>[800g/삼겹,목살]</div>
+                    <div class="line-3"><span class="original-prc">58,000</span><span class="current-prc">36,000</span><span class="discount-rate">38%</span></div>
+                    <div class="line-4">구성: 한돈 삼겹살 400g, 한돈 목살 400g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2023/600/Gogiachii_pork_2ea_1ho.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">12-2</span> [고기아찌] <span class="origin">국내산</span></div>
+                    <div class="line-2">[고기아찌] 초신선 한돈 돼지고기<br>선물세트 1호 [삼겹/전지]</div>
+                    <div class="line-3"><span class="original-prc">62,000</span><span class="current-prc">40,000</span><span class="discount-rate">35%</span></div>
+                    <div class="line-4">구성: 삼겹살 400g, 전지 400g (총 800g)</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://aproftp.speedgabia.com/jeju/jba/69-500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">12-3</span> [제주하우스] <span class="origin">국내산/제주</span></div>
+                    <div class="line-2">[제주하우스] 흑돈모둠세트<br>(흑돈삼겹+흑돈목심+흑돈전지)</div>
+                    <div class="line-3"><span class="original-prc">88,000</span><span class="current-prc">50,000</span><span class="discount-rate">43%</span></div>
+                    <div class="line-4">구성: 흑돈삼겹300g×2+목심300g+전지500g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://aproftp.speedgabia.com/jeju/ch/1-500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">12-4</span> [제주하우스] <span class="origin">국내산/제주</span></div>
+                    <div class="line-2">[제주하우스] 흑돈모둠세트<br>(흑돈삼겹+흑돈목심)</div>
+                    <div class="line-3"><span class="original-prc">92,000</span><span class="current-prc">52,000</span><span class="discount-rate">43%</span></div>
+                    <div class="line-4">구성: 흑돈삼겹300g×3+목심300g</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">12</div>
+    </div>
+
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <title>2026 설 선물 카탈로그 - 가공식품</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root { --brand: #8d705c; --red: #b33939; --gray: #999; }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
+        body { margin: 0; padding: 0; background: #eee; font-family: 'Pretendard', sans-serif; letter-spacing: -0.5px; }
+        @page { size: A4; margin: 0; }
+        .page { width: 210mm; height: 297mm; padding: 15mm 20mm; margin: 10mm auto; background: #fff; position: relative; page-break-after: always; display: flex; flex-direction: column; overflow: hidden; }
+        
+        .section-header { margin-bottom: 12px; border-bottom: 2.5px solid var(--brand); padding-bottom: 8px; }
+        .cat-name { font-size: 24px; font-weight: 800; color: var(--brand); }
+
+        .hero-banner { width: 100%; height: 280px; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
+        .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-list { display: flex; flex-direction: column; gap: 20px; }
+        .hero-item { display: flex; gap: 30px; height: 260px; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .hero-item .img-box { width: 260px; height: 260px; border: 1px solid #eee; flex-shrink: 0; }
+        .hero-item .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 25px 30px; margin-top: 5px; }
+        .grid-box { display: flex; flex-direction: column; }
+        .grid-box .img-box { width: 100%; aspect-ratio: 1 / 1; border: 1px solid #eee; margin-bottom: 8px; }
+        .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .info { text-align: left; display: flex; flex-direction: column; gap: 2px; }
+        .line-1 { font-size: 13px; font-weight: 600; color: var(--brand); display: flex; gap: 6px; } 
+        .line-1 .num { color: #000; font-weight: 800; }
+        .line-1 .origin { color: #999; font-weight: 400; }
+        
+        .hero-item .line-2 { font-size: 18px; font-weight: 800; color: #111; line-height: 1.3; margin: 2px 0; }
+        .grid-box .line-2 { font-size: 18px; font-weight: 800; color: #111; line-height: 1.25; min-height: 46px; display: flex; align-items: center; overflow: hidden; margin: 1px 0; }
+        
+        .line-3 { display: flex; align-items: baseline; gap: 8px; }
+        .original-prc { font-size: 15px; color: var(--gray); text-decoration: line-through; }
+        .current-prc { font-size: 24px; font-weight: 900; color: var(--red); }
+        .discount-rate { font-size: 19px; font-weight: 800; color: #d35400; }
+
+        /* 구성 잘림 방지 핵심 스타일 */
+        .line-4 { font-size: 11px; color: #666; border-top: 1px solid #f5f5f5; padding-top: 5px; min-height: 32px; height: auto; line-height: 1.35; overflow: visible; word-break: keep-all; }
+
+        .page-no { position: absolute; bottom: 10mm; right: 10mm; font-weight: bold; color: var(--brand); }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">03 가공식품</span></div>
+        <div class="hero-banner"><img src="https://jkimage.com/data/link/%EC%84%A4%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%83%88%20%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC/%EA%B0%80%EA%B3%B5%EC%8B%9D%ED%92%88.png"></div>
+        <div class="hero-list">
+            <div class="hero-item">
+                <div class="img-box"><img src="https://image.auction.co.kr/itemimage/52/28/76/5228765326.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">13-1</span> [CJ제일제당] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[CJ] 스팸 12K호</div>
+                    <div class="line-3"><span class="original-prc">65,000</span><span class="current-prc">28,000</span><span class="discount-rate">57%</span></div>
+                    <div class="line-4">구성: 스팸클래식 200g 8개</div>
+                </div>
+            </div>
+            <div class="hero-item">
+                <div class="img-box"><img src="https://bndmall2.imghost.cafe24.com/bndmall/ypmall/dong_ttunaa_15ho_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">13-2</span> [동원] <span class="origin">원양산 외</span></div>
+                    <div class="line-2">[동원] 참치 15호</div>
+                    <div class="line-3"><span class="original-prc">64,000</span><span class="current-prc">30,000</span><span class="discount-rate">53%</span></div>
+                    <div class="line-4">구성: 동원 쿡참치 85g x 15</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">13</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">03 가공식품</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://bndmall2.imghost.cafe24.com/bndmall/ypmall/cj_spam_8_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">14-1</span> [CJ제일제당] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[CJ] 스팸 8호</div>
+                    <div class="line-3"><span class="original-prc">90,000</span><span class="current-prc">35,000</span><span class="discount-rate">61%</span></div>
+                    <div class="line-4">구성: 스팸클래식 200g x 9</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://bndmall2.imghost.cafe24.com/bndmall/ypmall/dong_ttunaa_18ho_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">14-2</span> [동원] <span class="origin">원양산 외</span></div>
+                    <div class="line-2">[동원] 참치 18호</div>
+                    <div class="line-3"><span class="original-prc">75,000</span><span class="current-prc">35,000</span><span class="discount-rate">53%</span></div>
+                    <div class="line-4">구성: 동원 쿡참치 85g x 18</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://gntglobal.hgodo.com/gnt/img/622/SUM_500_1.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">14-3</span> [동원] <span class="origin">원양산 외</span></div>
+                    <div class="line-2">[동원] 튜나리챔 99호</div>
+                    <div class="line-3"><span class="original-prc">86,000</span><span class="current-prc">40,000</span><span class="discount-rate">53%</span></div>
+                    <div class="line-4">구성: 라이트스탠다드참치 135g 6캔, 고추참치 90g 6캔, 리챔 오리지널120g 3캔</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://bndmall2.imghost.cafe24.com/bndmall/ypmall/cj_25smartchi_25_03mm_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">14-4</span> [CJ제일제당] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[CJ] 스마트초이스 M호</div>
+                    <div class="line-3"><span class="original-prc">94,000</span><span class="current-prc">40,000</span><span class="discount-rate">57%</span></div>
+                    <div class="line-4">구성: 백설 해바라기씨유 500ml x 1, 요리 올리고당 700ml x 1, 스팸클래식 200g x 4, 스팸클래식 120g x 6, 와사비 솔트50g x 1, 참기름 80ml x 1</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">14</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">03 가공식품</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://bndmall2.imghost.cafe24.com/bndmall/ypmall/dong_ttunaa_24ho_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">15-1</span> [동원] <span class="origin">원양산 외</span></div>
+                    <div class="line-2">[동원] 참치 24호</div>
+                    <div class="line-3"><span class="original-prc">102,000</span><span class="current-prc">45,000</span><span class="discount-rate">56%</span></div>
+                    <div class="line-4">구성: 동원 쿡참치 85g x 24</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://bndmall2.imghost.cafe24.com/bndmall/ypmall/cj_spam_6_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">15-2</span> [CJ제일제당] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[CJ] 스팸 6호</div>
+                    <div class="line-3"><span class="original-prc">118,000</span><span class="current-prc">46,000</span><span class="discount-rate">61%</span></div>
+                    <div class="line-4">구성: 스팸클래식 200g x 12</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://sitem.ssgcdn.com/36/72/15/item/1000029157236_i1_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">15-3</span> [CJ제일제당] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[CJ] 스팸 최고의선택 풍성한 S호</div>
+                    <div class="line-3"><span class="original-prc">116,000</span><span class="current-prc">49,000</span><span class="discount-rate">58%</span></div>
+                    <div class="line-4">구성: 스팸클래식 200g 12개, 카놀라유 500ml 2개, 요리올리고당700g 1개</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://bndmall2.imghost.cafe24.com/bndmall/ypmall/cj_24_mcmc_02_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">15-4</span> [CJ제일제당] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[CJ] MC 2호</div>
+                    <div class="line-3"><span class="original-prc">154,000</span><span class="current-prc">58,000</span><span class="discount-rate">62%</span></div>
+                    <div class="line-4">구성: 스팸클래식 200g x 16</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">15</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">03 가공식품</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="http://faps.mycafe24.com/gift/2025/600/dnj05S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">16-1</span> [Johnsonville] <span class="origin">미국산외</span></div>
+                    <div class="line-2">[Johnsonville] 명절맞이 쟌슨빌<br>선물세트 E호 [5종]</div>
+                    <div class="line-3"><span class="original-prc">49,500</span><span class="current-prc">40,000</span><span class="discount-rate">19%</span></div>
+                    <div class="line-4">구성: 스모크소시지 360g , 스윗칠리맛폭립 500g , 뉴부대찌개 500g , 트리플풍기파스타 320g , 김치볶음밥 250g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://faps.mycafe24.com/gift/2025/600/dnj02S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">16-2</span> [Johnsonville] <span class="origin">미국산외</span></div>
+                    <div class="line-2">[Johnsonville] 명절맞이 쟌슨빌<br>선물세트 B호 [4종]</div>
+                    <div class="line-3"><span class="original-prc">60,000</span><span class="current-prc">42,000</span><span class="discount-rate">30%</span></div>
+                    <div class="line-4">구성: 스모크소시지 360g , 베다체다소시지 360g , 갈릭소시지 360g , 스윗칠리맛폭립 500g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://faps.mycafe24.com/gift/2025/600/dnj04S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">16-3</span> [Johnsonville] <span class="origin">미국산외</span></div>
+                    <div class="line-2">[Johnsonville] 명절맞이 쟌슨빌<br>선물세트 D호 [5종]</div>
+                    <div class="line-3"><span class="original-prc">65,000</span><span class="current-prc">47,000</span><span class="discount-rate">28%</span></div>
+                    <div class="line-4">구성: 스모크소시지 360g , 베다체다소시지 360g , 스윗칠리맛폭립 500g , 뉴부대찌개 500g , 토마토파스타 320g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://faps.mycafe24.com/gift/2025/600/dnj06S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">16-4</span> [Johnsonville] <span class="origin">미국산외</span></div>
+                    <div class="line-2">[Johnsonville] 명절맞이 쟌슨빌<br>선물세트 F호 [5종]</div>
+                    <div class="line-3"><span class="original-prc">64,000</span><span class="current-prc">49,000</span><span class="discount-rate">23%</span></div>
+                    <div class="line-4">구성: 스모크소시지 360g , 베다체다소시지 360g , 스윗칠리맛폭립 500g×2입, 뉴부대찌개 500g</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">16</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">03 가공식품</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2023/600/Samjin_giftset01_600.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">17-1</span> [삼진어묵] <span class="origin">외국산</span></div>
+                    <div class="line-2">[삼진어묵] 부산어묵 1953세트 1호<br>(NEW)</div>
+                    <div class="line-3"><span class="original-prc">46,000</span><span class="current-prc">33,000</span><span class="discount-rate">28%</span></div>
+                    <div class="line-4">구성: 홍단어묵(280g), 딱한끼어묵탕(순한맛)308g, 야채통통어묵(320g), 해물네모어묵(280g), 특천사각어묵(300g), 특낙엽어묵(280g), 와사비맛딥소스(65g), 주부천하쯔유(15ml)×2개</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2023/600/Samjin_giftset02_600.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">17-2</span> [삼진어묵] <span class="origin">외국산</span></div>
+                    <div class="line-2">[삼진어묵] 부산어묵 1953세트 2호<br>(NEW)</div>
+                    <div class="line-3"><span class="original-prc">54,000</span><span class="current-prc">42,000</span><span class="discount-rate">22%</span></div>
+                    <div class="line-4">구성: 홍단어묵(280g), 삼각당면어묵(330g), 야채통통어묵(320g), 해물네모어묵(280g), 한입치즈어묵 고소한맛 (250g), 딱한끼 순한맛(308g), 천오란다어묵(130g), 특천사각어묵(300g), 와사비맛딥소스(65g), 주부천하쯔유(15ml)×4입</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2023/600/Samjin_giftset05_600.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">17-3</span> [삼진어묵] <span class="origin">외국산</span></div>
+                    <div class="line-2">[삼진어묵] 삼진 프리미엄<br>선물세트 (NEW)</div>
+                    <div class="line-3"><span class="original-prc">63,000</span><span class="current-prc">51,000</span><span class="discount-rate">19%</span></div>
+                    <div class="line-4">구성: 당면도톰네모1, 야채도톰네모1, 부추잡채 도톰네모1, 핫땡초말이1, 깐간한 떡말이어묵1, 양파후추어묵1, 옥수수치즈어묵1, 감자버터어묵1, 애호박새우어묵1, 한입치즈어묵(고소한맛)1, 홍단1, 특낙엽1, 오징어땡소1, 와사비딥소스1, 어묵전골소스 4</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/Samjin_giftset06S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">17-4</span> [삼진어묵] <span class="origin">외국산</span></div>
+                    <div class="line-2">[삼진어묵] 삼진 프리미엄<br>선물세트 2호 (NEW)</div>
+                    <div class="line-3"><span class="original-prc">75,000</span><span class="current-prc">65,000</span><span class="discount-rate">13%</span></div>
+                    <div class="line-4">구성: 당면도톰네모2, 야채도톰네모2, 부추잡채 도톰네모2, 핫땡초말이1, 양파후추어묵1, 옥수수치즈어묵1, 감자버터어묵1, 애호박새우어묵1, 한입치즈어묵(고소한맛)1, 홍단1, 특낙엽1, 오징어땡소1, 통새우말이1, 순살바(야채맛)1, 순살바(매운맛)1, 순살바(오징어맛)1,와사비딥소스1, 어묵전골소스 4</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">17</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">03 가공식품</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/khan_jerky/giftset_choktong_dalin_360g_main.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">18-1</span> [칸육포] <span class="origin">국내산</span></div>
+                    <div class="line-2">[칸육포]<br>(국내산)촉촉통통 수제 쇠고기육포 선물세트 360g</div>
+                    <div class="line-3"><span class="original-prc">60,500</span><span class="current-prc">37,000</span><span class="discount-rate">39%</span></div>
+                    <div class="line-4">구성: 60g x 6개 쇼핑백</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/khan_jerky/giftset_choktong_dalin_420g_main.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">18-2</span> [칸육포] <span class="origin">국내산</span></div>
+                    <div class="line-2">[칸육포]<br>(국내산)촉촉통통 수제 쇠고기육포 선물세트 420g</div>
+                    <div class="line-3"><span class="original-prc">68,700</span><span class="current-prc">41,000</span><span class="discount-rate">40%</span></div>
+                    <div class="line-4">구성: 60g x 7개 쇼핑백</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/khan_jerky/giftset_choktong_dalin_480g_main.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">18-3</span> [칸육포] <span class="origin">국내산</span></div>
+                    <div class="line-2">[칸육포]<br>(국내산)촉촉통통 수제 쇠고기육포 선물세트 480g</div>
+                    <div class="line-3"><span class="original-prc">75,600</span><span class="current-prc">45,000</span><span class="discount-rate">40%</span></div>
+                    <div class="line-4">구성: 60g x 8개 쇼핑백</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/khan_jerky/premium korea beef gift set 420g_main.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">18-4</span> [칸육포] <span class="origin">국내산</span></div>
+                    <div class="line-2">[칸육포] 칸프리미엄 수제 한우육포<br>선물세트 420g</div>
+                    <div class="line-3"><span class="original-prc">105,000</span><span class="current-prc">56,000</span><span class="discount-rate">47%</span></div>
+                    <div class="line-4">구성: 60g x 7개 쇼핑백</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">18</div>
+    </div>
+
+</body>
+
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <title>2026 설 선물 카탈로그 - 수산</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root { --brand: #8d705c; --red: #b33939; --gray: #999; }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
+        body { margin: 0; padding: 0; background: #eee; font-family: 'Pretendard', sans-serif; letter-spacing: -0.5px; }
+        
+        /* 인쇄 설정 */
+        @page { size: A4; margin: 0; }
+        
+        /* 화면 스타일 */
+        .page { 
+            width: 210mm; 
+            height: 297mm; 
+            padding: 15mm 20mm; 
+            margin: 10mm auto; 
+            background: #fff; 
+            position: relative; 
+            overflow: hidden; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+        }
+
+        /* 인쇄 전용 스타일 */
+        @media print {
+            body { margin: 0; background: #fff; }
+            .page {
+                margin: 0;
+                border: none;
+                width: 210mm;
+                height: 297mm;
+                box-shadow: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+        }
+        
+        .section-header { margin-bottom: 12px; border-bottom: 2.5px solid var(--brand); padding-bottom: 8px; }
+        .cat-name { font-size: 24px; font-weight: 800; color: var(--brand); }
+
+        .hero-banner { width: 100%; height: 280px; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
+        .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-list { display: flex; flex-direction: column; gap: 20px; }
+        .hero-item { display: flex; gap: 30px; height: 260px; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .hero-item .img-box { width: 260px; height: 260px; border: 1px solid #eee; flex-shrink: 0; }
+        .hero-item .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 30px; margin-top: 5px; }
+        .grid-box { display: flex; flex-direction: column; }
+        .grid-box .img-box { width: 100%; aspect-ratio: 1 / 1; border: 1px solid #eee; margin-bottom: 8px; }
+        .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .info { text-align: left; display: flex; flex-direction: column; gap: 2px; }
+        .line-1 { font-size: 13px; font-weight: 600; color: var(--brand); display: flex; gap: 6px; } 
+        .line-1 .num { color: #000; font-weight: 800; }
+        .line-1 .origin { color: #999; font-weight: 400; }
+        
+        /* 상품명 스타일 수정: 21-2번 등 긴 제목 처리 */
+        .hero-item .line-2 { font-size: 18px; font-weight: 800; color: #111; line-height: 1.3; margin: 2px 0; }
+        .grid-box .line-2 { 
+            font-size: 18px; 
+            font-weight: 800; 
+            color: #111; 
+            line-height: 1.25; 
+            min-height: 46px; 
+            display: flex;
+            align-items: center; 
+            overflow: hidden; 
+            margin: 1px 0; 
+        }
+        
+        .line-3 { display: flex; align-items: baseline; gap: 8px; }
+        .original-prc { font-size: 15px; color: var(--gray); text-decoration: line-through; }
+        .current-prc { font-size: 24px; font-weight: 900; color: var(--red); }
+        .discount-rate { font-size: 19px; font-weight: 800; color: #d35400; }
+        .line-4 { font-size: 11px; color: #666; border-top: 1px solid #f5f5f5; padding-top: 5px; min-height: 32px; height: auto; line-height: 1.35; overflow: visible; word-break: keep-all; }
+
+        .page-no { position: absolute; bottom: 10mm; right: 10mm; font-weight: bold; color: var(--brand); }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">04 수산</span></div>
+        <div class="hero-banner"><img src="https://jkimage.com/data/link/%EC%84%A4%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%83%88%20%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC/%EC%88%98%EC%82%B0%EB%AC%BC.png"></div>
+        <div class="hero-list">
+            <div class="hero-item">
+                <div class="img-box"><img src="https://naraebnc.speedgabia.com/grace_taste/gulbi/chamgulbi/chamgulbi_1.4kg/chamgulbi_1.4kg_main.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">19-1</span> [기품맛담] <span class="origin">국내산</span></div>
+                    <div class="line-2">[기품맛담] 영광법성포 참굴비 장대 선물세트<br>20미/1.4kg/18~20cm</div>
+                    <div class="line-3"><span class="original-prc">126,000</span><span class="current-prc">52,000</span><span class="discount-rate">59%</span></div>
+                    <div class="line-4">구성: 20미/1.4kg/18~20cm</div>
+                </div>
+            </div>
+            <div class="hero-item">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/SJYT_premium_1_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">19-2</span> [전남영광] <span class="origin">국내산</span></div>
+                    <div class="line-2">[전남영광] 국내산 프리미엄 굴비 선물세트 1호<br>[800g/10미]</div>
+                    <div class="line-3"><span class="original-prc">120,000</span><span class="current-prc">58,000</span><span class="discount-rate">52%</span></div>
+                    <div class="line-4">구성: 0.8kg/10미</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">19</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">04 수산</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/SJYT_cham-gulbii_1_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">20-1</span> [전남영광] <span class="origin">국내산</span></div>
+                    <div class="line-2">[전남영광] 국내산 참굴비 선물세트 1호<br>[1.4kg/20미]</div>
+                    <div class="line-3"><span class="original-prc">120,000</span><span class="current-prc">64,000</span><span class="discount-rate">47%</span></div>
+                    <div class="line-4">구성: 1.4kg/20미</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://naraebnc.speedgabia.com/grace_taste/gulbi/busegulbi/busegulbi_10mi_28_30/busegulbi_10mi_28_30_main.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">20-2</span> [기품맛담] <span class="origin">중국산 외</span></div>
+                    <div class="line-2">[기품맛담] 영광법성포 부세 보리굴비 선물세트10미 (특/28~30cm)</div>
+                    <div class="line-3"><span class="original-prc">196,000</span><span class="current-prc">91,000</span><span class="discount-rate">54%</span></div>
+                    <div class="line-4">구성: 10미(특/28~30cm)</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://naraebnc.speedgabia.com/grace_taste/gulbi/ogagulbi/ogagulbi_1.1kg/ogagulbi_1.1kg_main.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">20-3</span> [기품맛담] <span class="origin">국내산</span></div>
+                    <div class="line-2">[기품맛담] 영광법성포 오가굴비 선물세트<br>10미/1.1kg/21cm내외</div>
+                    <div class="line-3"><span class="original-prc">235,000</span><span class="current-prc">112,000</span><span class="discount-rate">52%</span></div>
+                    <div class="line-4">구성: 10미/1.1kg/21cm내외</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://aproftp.speedgabia.com/jeju/jba/24-500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">20-4</span> [제주하우스] <span class="origin">국내</span></div>
+                    <div class="line-2">[제주하우스] 中갈치 세트 1호<br>(제주 갈치 230g x 4팩)</div>
+                    <div class="line-3"><span class="original-prc">61,000</span><span class="current-prc">32,000</span><span class="discount-rate">48%</span></div>
+                    <div class="line-4">구성: 제주 갈치 230g x 4팩</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">20</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">04 수산</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://aproftp.speedgabia.com/jeju/ss/26-500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">21-1</span> [제주하우스] <span class="origin">국내산</span></div>
+                    <div class="line-2">[제주하우스] 순살고등어실속<br>130g x 10쪽/1.3kg</div>
+                    <div class="line-3"><span class="original-prc">65,000</span><span class="current-prc">37,000</span><span class="discount-rate">43%</span></div>
+                    <div class="line-4">구성: 30g x 10쪽/1.3kg</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://aproftp.speedgabia.com/jeju/ss/25-500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">21-2</span> [제주하우스] <span class="origin">국내산</span></div>
+                    <div class="line-2">[제주하우스]  순살고등어특호<br>160g x 10쪽/1.6kg</div>
+                    <div class="line-3"><span class="original-prc">68,000</span><span class="current-prc">52,000</span><span class="discount-rate">24%</span></div>
+                    <div class="line-4">구성: 160g x 10쪽/1.6kg</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://naraebnc.speedgabia.com/grace_taste/Lobster/04_Lobster_redshrimp_1.4kg/04_Lobster_redshrimp_1.4kg_main.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">21-3</span> [기품맛담] <span class="origin">자숙랍스터:캐나다/홍새우:아르헨티나</span></div>
+                    <div class="line-2">[기품맛담] 자숙랍스터/홍새우 혼합 선물세트<br>1.8kg</div>
+                    <div class="line-3"><span class="original-prc">206,000</span><span class="current-prc">95,000</span><span class="discount-rate">54%</span></div>
+                    <div class="line-4">구성: [기품맛담] 자숙랍스터/홍새우 혼합 선물세트 1.8kg</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://naraebnc.speedgabia.com/grace_taste/Lobster/05_Lobster_blacktiger_1.4kg/05_Lobster_blacktiger_1.4kg_main.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">21-4</span> [기품맛담] <span class="origin">자숙랍스터:캐나다/블랙타이거새우:인도</span></div>
+                    <div class="line-2">[기품맛담] 자숙랍스터/블랙타이거새우<br>혼합선물세트 1.4kg</div>
+                    <div class="line-3"><span class="original-prc">198,000</span><span class="current-prc">91,000</span><span class="discount-rate">54%</span></div>
+                    <div class="line-4">구성: [기품맛담] 자숙랍스터/블랙타이거새우 혼합선물세트 1.4kg</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">21</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">04 수산</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="http://faps.mycafe24.com/gift/2026/600/hwr141S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">22-1</span> [해울림] <span class="origin">국내산</span></div>
+                    <div class="line-2">[해울림] 행복한 멸치 선물세트<br>3-1호</div>
+                    <div class="line-3"><span class="original-prc">42,000</span><span class="current-prc">23,000</span><span class="discount-rate">45%</span></div>
+                    <div class="line-4">구성: 세멸 140g, 소멸 120g, 중멸 110g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://faps.mycafe24.com/gift/2026/600/hwr142S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">22-2</span> [해울림] <span class="origin">국내산</span></div>
+                    <div class="line-2">[해울림] 특별한 멸치 선물세트<br>1-1호</div>
+                    <div class="line-3"><span class="original-prc">70,000</span><span class="current-prc">33,000</span><span class="discount-rate">53%</span></div>
+                    <div class="line-4">구성: 세멸 140g×2입, 소멸 120g×2입</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://faps.mycafe24.com/gift/2026/600/hwr144S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">22-3</span> [해울림] <span class="origin">국내산</span></div>
+                    <div class="line-2">[해울림] 품격을 더한 프리미엄 멸치 선물세트<br></div>
+                    <div class="line-3"><span class="original-prc">92,800</span><span class="current-prc">51,000</span><span class="discount-rate">45%</span></div>
+                    <div class="line-4">구성: 세멸 140g×2입, 소멸 120g×2입, 중멸 110g×2입, 대멸 100g×2입</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/hwr19S.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">22-4</span> [해울림] <span class="origin">국내산</span></div>
+                    <div class="line-2">[해울림] 멸치세트 귀족 6호</div>
+                    <div class="line-3"><span class="original-prc">149,000</span><span class="current-prc">60,000</span><span class="discount-rate">60%</span></div>
+                    <div class="line-4">구성: 소멸 300g, 꽃새우 200g, 대멸 300g</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">22</div>
+    </div>
+
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <title>2026 설 선물 카탈로그 - 김세트 (최종 수정본)</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root { --brand: #8d705c; --red: #b33939; --gray: #999; }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
+        
+        body { margin: 0; padding: 0; background: #eee; font-family: 'Pretendard', sans-serif; letter-spacing: -0.5px; }
+
+        /* 인쇄 설정 */
+        @page { size: A4; margin: 0; }
+        
+        /* 화면 스타일 */
+        .page { 
+            width: 210mm; 
+            height: 297mm; 
+            padding: 15mm 20mm; 
+            margin: 10mm auto; 
+            background: #fff; 
+            position: relative; 
+            overflow: hidden; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+        }
+
+        /* 인쇄 전용 스타일 */
+        @media print {
+            body { margin: 0; background: #fff; }
+            .page {
+                margin: 0;
+                border: none;
+                width: 210mm;
+                height: 297mm;
+                box-shadow: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+        }
+        
+        .section-header { margin-bottom: 12px; border-bottom: 2.5px solid var(--brand); padding-bottom: 8px; }
+        .cat-name { font-size: 24px; font-weight: 800; color: var(--brand); }
+
+        .hero-banner { width: 100%; height: 280px; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
+        .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-list { display: flex; flex-direction: column; gap: 20px; }
+        .hero-item { display: flex; gap: 30px; height: 260px; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .hero-item .img-box { width: 260px; height: 260px; border: 1px solid #eee; flex-shrink: 0; }
+        .hero-item .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 30px; margin-top: 5px; }
+        .grid-box { display: flex; flex-direction: column; }
+        .grid-box .img-box { width: 100%; aspect-ratio: 1 / 1; border: 1px solid #eee; margin-bottom: 8px; }
+        .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .info { text-align: left; display: flex; flex-direction: column; gap: 2px; }
+        .line-1 { font-size: 13px; font-weight: 600; color: var(--brand); display: flex; gap: 6px; } 
+        .line-1 .num { color: #000; font-weight: 800; }
+        .line-1 .origin { color: #999; font-weight: 400; }
+        
+        /* 상품명 스타일 */
+        .hero-item .line-2 { font-size: 18px; font-weight: 800; color: #111; line-height: 1.3; margin: 2px 0; }
+        .grid-box .line-2 { 
+            font-size: 18px; 
+            font-weight: 800; 
+            color: #111; 
+            line-height: 1.25; 
+            min-height: 46px; 
+            display: flex;
+            align-items: center; 
+            overflow: hidden; 
+            margin: 1px 0; 
+        }
+        
+        .line-3 { display: flex; align-items: baseline; gap: 8px; }
+        .original-prc { font-size: 15px; color: var(--gray); text-decoration: line-through; }
+        .current-prc { font-size: 24px; font-weight: 900; color: var(--red); }
+        .discount-rate { font-size: 19px; font-weight: 800; color: #d35400; }
+        .line-4 { font-size: 11px; color: #666; border-top: 1px solid #f5f5f5; padding-top: 5px; min-height: 32px; height: auto; line-height: 1.35; overflow: visible; word-break: keep-all; }
+
+        .page-no { position: absolute; bottom: 10mm; right: 10mm; font-weight: bold; color: var(--brand); }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">05 김세트</span></div>
+        <div class="hero-banner"><img src="https://jkimage.com/data/link/%EC%84%A4%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%83%88%20%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC/%EA%B9%80.png"></div>
+        <div class="hero-list">
+            <div class="hero-item">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/haejeofood/kumchong_3_th.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">23-1</span> [광천해저김] <span class="origin">국내산</span></div>
+                    <div class="line-2">[광천해저김] 곱창돌김3호</div>
+                    <div class="line-3"><span class="original-prc">68,000</span><span class="current-prc">24,000</span><span class="discount-rate">65%</span></div>
+                    <div class="line-4">구성: 곱창돌김캔40g*3개</div>
+                </div>
+            </div>
+            <div class="hero-item">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/hanfoodi_canjaeraegim_so_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">23-2</span> [김대통령] <span class="origin">국내산</span></div>
+                    <div class="line-2">[김대통령] 해맞이&달맞이 캔돌김 선물세트<br>[소/각2캔씩]</div>
+                    <div class="line-3"><span class="original-prc">58,000</span><span class="current-prc">28,000</span><span class="discount-rate">52%</span></div>
+                    <div class="line-4">구성: 해맞이재래돌김(30g)×2캔,달맞이재래돌김(30g)×2캔</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">23</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">05 김세트</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/haejeofood/myeongpumseonmul_6_th.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">24-1</span> [광천해저김] <span class="origin">국내산</span></div>
+                    <div class="line-2">[광천해저김] 명품선물세트<br>6호</div>
+                    <div class="line-3"><span class="original-prc">90,000</span><span class="current-prc">31,000</span><span class="discount-rate">66%</span></div>
+                    <div class="line-4">구성: 명품캔 30g*6개</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/hanfoodi_dol-paraegim_01_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">24-2</span> [김대통령] <span class="origin">국내산</span></div>
+                    <div class="line-2">[김대통령] 캔돌김&전장김 선물세트 1호<br>[각1캔씩+전장김5봉]</div>
+                    <div class="line-3"><span class="original-prc">49,000</span><span class="current-prc">32,000</span><span class="discount-rate">35%</span></div>
+                    <div class="line-4">구성: 해맞이돌김(30g)×1캔,달맞이돌김(30g)×1캔,파래전장김(20g)×5봉</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/haejeofood/myeongpumseonmul_5_th.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">24-3</span> [광천해저김] <span class="origin">국내산</span></div>
+                    <div class="line-2">[광천해저김] 명품선물세트<br>5호</div>
+                    <div class="line-3"><span class="original-prc">48,000</span><span class="current-prc">35,000</span><span class="discount-rate">27%</span></div>
+                    <div class="line-4">구성: 명품전장23g*4봉 / 명품캔30g*4개</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/haejeofood/kumchong_5_th.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">24-4</span> [광천해저김] <span class="origin">국내산</span></div>
+                    <div class="line-2">[광천해저김] 곱창돌김5호</div>
+                    <div class="line-3"><span class="original-prc">60,000</span><span class="current-prc">39,000</span><span class="discount-rate">35%</span></div>
+                    <div class="line-4">구성: 곱창돌김12g*4봉 / 곱창돌김캔40g*4개</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">24</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">05 김세트</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/hanfoodi_canjaeraegim_jung_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">25-1</span> [김대통령] <span class="origin">국내산</span></div>
+                    <div class="line-2">[김대통령] 해맞이&달맞이 캔돌김 선물세트<br>[중/각3캔씩]</div>
+                    <div class="line-3"><span class="original-prc">72,000</span><span class="current-prc">42,000</span><span class="discount-rate">42%</span></div>
+                    <div class="line-4">구성: 해맞이재래돌김(30g)×3캔,달맞이재래돌김(30g)×3캔</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/hanfoodi_canjaeraegim_dae_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">25-2</span> [김대통령] <span class="origin">국내산</span></div>
+                    <div class="line-2">[김대통령] 해맞이&달맞이 캔돌김 선물세트<br>[대/각4캔씩]</div>
+                    <div class="line-3"><span class="original-prc">90,000</span><span class="current-prc">53,000</span><span class="discount-rate">41%</span></div>
+                    <div class="line-4">구성: 해맞이재래돌김(30g)×4캔,달맞이재래돌김(30g)×4캔</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/etc_01/haejeofood/myeongpumseonmul_4-9_th.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">25-3</span> [광천해저김] <span class="origin">국내산</span></div>
+                    <div class="line-2">[광천해저김] 명품선물세트<br>4-9호</div>
+                    <div class="line-3"><span class="original-prc">42,400</span><span class="current-prc">53,000</span><span class="discount-rate">-25%</span></div>
+                    <div class="line-4">구성: 명품전장23g*4봉 / 명품캔30g*9개</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/hanfoodi_canjaeraegim_teuk_500.jpg"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">25-4</span> [김대통령] <span class="origin">국내산</span></div>
+                    <div class="line-2">[김대통령] 해맞이&달맞이 캔돌김 선물세트<br>[특/각5캔씩]</div>
+                    <div class="line-3"><span class="original-prc">112,000</span><span class="current-prc">67,000</span><span class="discount-rate">40%</span></div>
+                    <div class="line-4">구성: 해맞이재래돌김(30g)×5캔,달맞이재래돌김(30g)×5캔</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">25</div>
+    </div>
+
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <title>2026 설 선물 카탈로그 - 건강식품</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root { --brand: #8d705c; --red: #b33939; --gray: #999; }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
+        
+        body { margin: 0; padding: 0; background: #eee; font-family: 'Pretendard', sans-serif; letter-spacing: -0.5px; }
+
+        /* 인쇄 설정: 여백 제거 */
+        @page { size: A4; margin: 0; }
+        
+        /* 화면 스타일 */
+        .page { 
+            width: 210mm; 
+            height: 297mm; 
+            padding: 15mm 20mm; 
+            margin: 10mm auto; 
+            background: #fff; 
+            position: relative; 
+            overflow: hidden; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+        }
+
+        /* 인쇄 전용 스타일 */
+        @media print {
+            body { margin: 0; background: #fff; }
+            .page {
+                margin: 0;
+                border: none;
+                width: 210mm;
+                height: 297mm;
+                box-shadow: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+        }
+        
+        .section-header { margin-bottom: 12px; border-bottom: 2.5px solid var(--brand); padding-bottom: 8px; }
+        .cat-name { font-size: 24px; font-weight: 800; color: var(--brand); }
+
+        /* Hero (첫 페이지) 스타일 */
+        .hero-banner { width: 100%; height: 280px; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
+        .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-list { display: flex; flex-direction: column; gap: 20px; }
+        .hero-item { display: flex; gap: 30px; height: 260px; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .hero-item .img-box { width: 260px; height: 260px; border: 1px solid #eee; flex-shrink: 0; }
+        .hero-item .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* Grid (나머지 페이지) 스타일 */
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 30px; margin-top: 5px; }
+        .grid-box { display: flex; flex-direction: column; }
+        .grid-box .img-box { width: 100%; aspect-ratio: 1 / 1; border: 1px solid #eee; margin-bottom: 8px; }
+        .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .info { text-align: left; display: flex; flex-direction: column; gap: 2px; }
+        .line-1 { font-size: 13px; font-weight: 600; color: var(--brand); display: flex; gap: 6px; } 
+        .line-1 .num { color: #000; font-weight: 800; }
+        .line-1 .origin { color: #999; font-weight: 400; }
+        
+        /* 상품명 스타일 */
+        .hero-item .line-2 { font-size: 18px; font-weight: 800; color: #111; line-height: 1.3; margin: 2px 0; }
+        .grid-box .line-2 { 
+            font-size: 18px; 
+            font-weight: 800; 
+            color: #111; 
+            line-height: 1.25; 
+            min-height: 46px; 
+            display: flex;
+            align-items: center; 
+            overflow: hidden; 
+            margin: 1px 0; 
+        }
+        
+        .line-3 { display: flex; align-items: baseline; gap: 8px; }
+        .original-prc { font-size: 15px; color: var(--gray); text-decoration: line-through; }
+        .current-prc { font-size: 24px; font-weight: 900; color: var(--red); }
+        .discount-rate { font-size: 19px; font-weight: 800; color: #d35400; }
+        .line-4 { font-size: 11px; color: #666; border-top: 1px solid #f5f5f5; padding-top: 5px; min-height: 32px; height: auto; line-height: 1.35; overflow: visible; word-break: keep-all; }
+
+        .page-no { position: absolute; bottom: 10mm; right: 10mm; font-weight: bold; color: var(--brand); }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">06 건강식품</span></div>
+        <div class="hero-banner"><img src="https://jkimage.com/data/link/%EC%84%A4%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%83%88%20%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC/%EA%B1%B4%EA%B0%95%EC%8B%9D%ED%92%88.png"></div>
+        <div class="hero-list">
+            <div class="hero-item">
+                <div class="img-box"><img src="https://luce21.diskn.com/health food.etc/jungkwanjang/biryeok/KGC_biryeok_500.jpg"> loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">26-1</span> [정관장] <span class="origin">국산</span></div>
+                    <div class="line-2">[정관장] 홍삼비력 50ml x 30포(리뉴얼)</div>
+                    <div class="line-3"><span class="original-prc">40,000</span><span class="current-prc">34,000</span><span class="discount-rate">15%</span></div>
+                    <div class="line-4">구성: 50ml x 30포50</div>
+                </div>
+            </div>
+            <div class="hero-item">
+                <div class="img-box"><img src="https://bndmall2.imghost.cafe24.com/bndmall/ypmall/kgc_hsammbolukk_5020_500.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">26-2</span> [정관장] <span class="origin">국산</span></div>
+                    <div class="line-2">[정관장] 홍삼보력 (50ml x 20포)</div>
+                    <div class="line-3"><span class="original-prc">98,000</span><span class="current-prc">35,000</span><span class="discount-rate">64%</span></div>
+                    <div class="line-4">구성: 50ml x 20포</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">26</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">06 건강식품</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://bndmall2.imghost.cafe24.com/bndmall/ypmall/kgc_hongsammbonruukk_4030_500.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">27-1</span> [정관장] <span class="origin">국산</span></div>
+                    <div class="line-2">[정관장] 홍삼본력 (40ml x 30포)</div>
+                    <div class="line-3"><span class="original-prc">67,000</span><span class="current-prc">45,000</span><span class="discount-rate">33%</span></div>
+                    <div class="line-4">구성: 40ml x 30포</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/health food.etc/hongsamfullup_main.png" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">27-2</span> [정관장] <span class="origin">국산</span></div>
+                    <div class="line-2">[정관장] 홍삼충전 50ml x 30포</div>
+                    <div class="line-3"><span class="original-prc">77,000</span><span class="current-prc">45,000</span><span class="discount-rate">42%</span></div>
+                    <div class="line-4">구성: 50ml x 30포</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://contents.lotteon.com/itemimage/20260108092838/LO/26/01/56/69/18/_2/60/15/66/91/9/LO2601566918_2601566919_1.jpg/dims/resizef/554X554/format/webp/optimize" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">27-3</span> [정관장] <span class="origin">국산</span></div>
+                    <div class="line-2">[정관장] 홍삼보활 40ml x 30포</div>
+                    <div class="line-3"><span class="original-prc">60,000</span><span class="current-prc">47,000</span><span class="discount-rate">22%</span></div>
+                    <div class="line-4">구성: 40ml x 30포</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://static.megamart.com/product/image/1327/13278335/13278335_1_960.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">27-4</span> [정관장] <span class="origin">국산</span></div>
+                    <div class="line-2">[정관장] 홍삼보가 50ml*30포</div>
+                    <div class="line-3"><span class="original-prc">65,000</span><span class="current-prc">49,000</span><span class="discount-rate">25%</span></div>
+                    <div class="line-4">구성: 50ml*30포</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">27</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">06 건강식품</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://palmwelllife.com/web/product/extra/small/202510/50de2730a9217d8e970fe8747d88db4f.png" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">28-1</span> [정관장] <span class="origin">국산</span></div>
+                    <div class="line-2">[정관장] 홍삼보윤정 데일리스틱<br>(10ml x 30포)</div>
+                    <div class="line-3"><span class="original-prc">135,000</span><span class="current-prc">78,000</span><span class="discount-rate">42%</span></div>
+                    <div class="line-4">구성: 10ml x 30포</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/health food.etc/jungkwanjang/bongjung_2024/junggwanjang_bonjung250x2_main.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">28-2</span> [정관장] <span class="origin">국산</span></div>
+                    <div class="line-2">[정관장] 홍삼본정 250gx2병</div>
+                    <div class="line-3"><span class="original-prc">120,000</span><span class="current-prc">79,000</span><span class="discount-rate">34%</span></div>
+                    <div class="line-4">구성: 250g x 2병</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://shop-phinf.pstatic.net/20251219_6/1766147055010V52mb_JPEG/15216806066724215_1205372995.jpg?type=m1000_pd" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">28-3</span> [정관장] <span class="origin">국산</span></div>
+                    <div class="line-2">[정관장] 홍삼 정화액<br>100g*2병 세트</div>
+                    <div class="line-3"><span class="original-prc">220,000</span><span class="current-prc">87,000</span><span class="discount-rate">60%</span></div>
+                    <div class="line-4">구성: 100g x 2병</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://contents.lotteon.com/itemimage/20251203153257/LO/23/32/87/17/52/_2/33/28/71/75/3/LO2332871752_2332871753_1.jpg/dims/resizef/554X554/format/webp/optimize" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">28-4</span> [정관장] <span class="origin">국산</span></div>
+                    <div class="line-2">[정관장] 홍삼본정 250gx3병</div>
+                    <div class="line-3"><span class="original-prc">180,000</span><span class="current-prc">112,000</span><span class="discount-rate">38%</span></div>
+                    <div class="line-4">구성: 250g x 3병</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">28</div>
+    </div>
+
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <title>2026 설 선물 카탈로그 - 오일/조미료</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root { --brand: #8d705c; --red: #b33939; --gray: #999; }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
+        
+        body { margin: 0; padding: 0; background: #eee; font-family: 'Pretendard', sans-serif; letter-spacing: -0.5px; }
+
+        /* 인쇄 설정 */
+        @page { size: A4; margin: 0; }
+        
+        /* 화면 스타일 */
+        .page { 
+            width: 210mm; 
+            height: 297mm; 
+            padding: 15mm 20mm; 
+            margin: 10mm auto; 
+            background: #fff; 
+            position: relative; 
+            overflow: hidden; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+        }
+
+        /* 인쇄 전용 스타일 */
+        @media print {
+            body { margin: 0; background: #fff; }
+            .page {
+                margin: 0;
+                border: none;
+                width: 210mm;
+                height: 297mm;
+                box-shadow: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+        }
+        
+        .section-header { margin-bottom: 12px; border-bottom: 2.5px solid var(--brand); padding-bottom: 8px; }
+        .cat-name { font-size: 24px; font-weight: 800; color: var(--brand); }
+
+        .hero-banner { width: 100%; height: 280px; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
+        .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-list { display: flex; flex-direction: column; gap: 20px; }
+        .hero-item { display: flex; gap: 30px; height: 260px; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .hero-item .img-box { width: 260px; height: 260px; border: 1px solid #eee; flex-shrink: 0; }
+        .hero-item .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 30px; margin-top: 5px; }
+        .grid-box { display: flex; flex-direction: column; }
+        .grid-box .img-box { width: 100%; aspect-ratio: 1 / 1; border: 1px solid #eee; margin-bottom: 8px; }
+        .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .info { text-align: left; display: flex; flex-direction: column; gap: 2px; }
+        .line-1 { font-size: 13px; font-weight: 600; color: var(--brand); display: flex; gap: 6px; } 
+        .line-1 .num { color: #000; font-weight: 800; }
+        .line-1 .origin { color: #999; font-weight: 400; }
+        
+        .hero-item .line-2 { font-size: 18px; font-weight: 800; color: #111; line-height: 1.3; margin: 2px 0; }
+        .grid-box .line-2 { 
+            font-size: 18px; 
+            font-weight: 800; 
+            color: #111; 
+            line-height: 1.25; 
+            min-height: 46px; 
+            display: flex;
+            align-items: center; 
+            overflow: hidden; 
+            margin: 1px 0; 
+        }
+        
+        .line-3 { display: flex; align-items: baseline; gap: 8px; }
+        .original-prc { font-size: 15px; color: var(--gray); text-decoration: line-through; }
+        .current-prc { font-size: 24px; font-weight: 900; color: var(--red); }
+        .discount-rate { font-size: 19px; font-weight: 800; color: #d35400; }
+        .line-4 { font-size: 11px; color: #666; border-top: 1px solid #f5f5f5; padding-top: 5px; min-height: 32px; height: auto; line-height: 1.35; overflow: visible; word-break: keep-all; }
+
+        .page-no { position: absolute; bottom: 10mm; right: 10mm; font-weight: bold; color: var(--brand); }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">07 오일/조미료</span></div>
+        <div class="hero-banner"><img src="https://jkimage.com/data/link/%EC%84%A4%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%83%88%20%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC/%EC%98%A4%EC%9D%BC%20%EC%A1%B0%EB%AF%B8%EB%A3%8C.png"></div>
+        <div class="hero-list">
+            <div class="hero-item">
+                <div class="img-box"><img src="http://faps.mycafe24.com/gift/2025/600/Bestby_25S.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">29-1</span> [들메내참기름] <span class="origin">외국산</span></div>
+                    <div class="line-2">[들메내참기름] 전통재래압착 참기름 선물세트<br>결들 4호</div>
+                    <div class="line-3"><span class="original-prc">48,000</span><span class="current-prc">25,000</span><span class="discount-rate">48%</span></div>
+                    <div class="line-4">구성: 참기름 180ml×2병, 볶음통깨 140g</div>
+                </div>
+            </div>
+            <div class="hero-item">
+                <div class="img-box"><img src="https://luce21.diskn.com/tarega/sorban/sorban_2_th.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">29-2</span> [소르반] <span class="origin">스페인</span></div>
+                    <div class="line-2">[소르반] 엑스트라 버진 올리브오일500ml 2입세트</div>
+                    <div class="line-3"><span class="original-prc">68,000</span><span class="current-prc">26,000</span><span class="discount-rate">62%</span></div>
+                    <div class="line-4">구성: 올리브오일500ml 2입세트</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">29</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">07 오일/조미료</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/health food.etc/2506/kkosum/kkosum_cham1_dle1_salt1_kkae1_th.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">30-1</span> [꼬숨식품] <span class="origin">국내산 외</span></div>
+                    <div class="line-2">[꼬숨식품] 저온압착 참기름 들기름 4종세트S<br>(참기름+들기름+핑크솔트+볶음참깨)</div>
+                    <div class="line-3"><span class="original-prc">44,000</span><span class="current-prc">27,000</span><span class="discount-rate">39%</span></div>
+                    <div class="line-4">구성: 참기름(180ml X 1병),들기름(180mlX1병),
+ 핑크소금(160gX1병),볶음참깨(60gx1병)</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/Tarrega08_600.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">30-2</span> [TARREGA] <span class="origin">스페인산</span></div>
+                    <div class="line-2">[TARREGA] 스페인산 타레가 포도씨유 1000ml+해바라기씨유 1000ml</div>
+                    <div class="line-3"><span class="original-prc">54,000</span><span class="current-prc">37,000</span><span class="discount-rate">31%</span></div>
+                    <div class="line-4">구성: 포도씨유 1000ml, 해바라기씨유 1000ml</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/tarega/sorban/sorban_3_th.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">30-3</span> [소르반] <span class="origin">스페인</span></div>
+                    <div class="line-2">[소르반] 엑스트라 버진 올리브오일500ml<br>3입세트</div>
+                    <div class="line-3"><span class="original-prc">70,000</span><span class="current-prc">38,000</span><span class="discount-rate">46%</span></div>
+                    <div class="line-4">구성: 올리브오일500ml 3입세트</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/slow_03S.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">30-4</span> [부엉이곳간] <span class="origin">국산</span></div>
+                    <div class="line-2">[부엉이곳간] 프리미엄 간장&소금 3종<br>선물세트</div>
+                    <div class="line-3"><span class="original-prc">69,000</span><span class="current-prc">42,000</span><span class="discount-rate">39%</span></div>
+                    <div class="line-4">구성: 맛간장(580g),갯벌천일염(250g),허브천일염(170g)</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">30</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">07 오일/조미료</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/Tarrega07_600.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">31-1</span> [TARREGA] <span class="origin">스페인산</span></div>
+                    <div class="line-2">[TARREGA] 스페인산 타레가 올리브유 1000ml+해바라기씨유 1000ml</div>
+                    <div class="line-3"><span class="original-prc">58,000</span><span class="current-prc">43,000</span><span class="discount-rate">26%</span></div>
+                    <div class="line-4">구성: 엑스트라버진 올리브유 1000ml, 해바라기씨유 1000ml</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/slow_01S.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">31-2</span> [부엉이곳간] <span class="origin">국산</span></div>
+                    <div class="line-2">[부엉이곳간] 프리미엄 간장 2종 선물세트<br></div>
+                    <div class="line-3"><span class="original-prc">62,000</span><span class="current-prc">44,000</span><span class="discount-rate">29%</span></div>
+                    <div class="line-4">구성: 맛간장(580g),국간장(580g)</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://luce21.diskn.com/health food.etc/2506/kkosum/kkosum_cham2_salt2_main.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">31-3</span> [꼬숨식품] <span class="origin">국내산 외</span></div>
+                    <div class="line-2">[꼬숨식품] 저온압착 (국내산)참기름4종세트<br>(참기름2+핑크솔트2)</div>
+                    <div class="line-3"><span class="original-prc">83,000</span><span class="current-prc">52,000</span><span class="discount-rate">37%</span></div>
+                    <div class="line-4">구성: 참기름(180ml X 2병) 
+ 핑크소금(160gX2병)</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2025/600/slow_S07.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">31-4</span> [부엉이곳간] <span class="origin">국산</span></div>
+                    <div class="line-2">[부엉이곳간] 프리미엄 간장&천연가루 4종 선물세트</div>
+                    <div class="line-3"><span class="original-prc">78,000</span><span class="current-prc">59,000</span><span class="discount-rate">24%</span></div>
+                    <div class="line-4">구성: 맛간장(580g), 국간장(580g) ,구운새우가루(100g), 구운멸치가루(100g)</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">31</div>
+    </div>
+
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <title>2026 설 선물 카탈로그 - 견과/버섯/잡곡</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root { --brand: #8d705c; --red: #b33939; --gray: #999; }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
+        
+        body { margin: 0; padding: 0; background: #eee; font-family: 'Pretendard', sans-serif; letter-spacing: -0.5px; }
+
+        /* 인쇄 설정 */
+        @page { size: A4; margin: 0; }
+        
+        /* 화면 스타일 */
+        .page { 
+            width: 210mm; 
+            height: 297mm; 
+            padding: 15mm 20mm; 
+            margin: 10mm auto; 
+            background: #fff; 
+            position: relative; 
+            overflow: hidden; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+        }
+
+        /* 인쇄 전용 스타일 */
+        @media print {
+            body { margin: 0; background: #fff; }
+            .page {
+                margin: 0;
+                border: none;
+                width: 210mm;
+                height: 297mm;
+                box-shadow: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+        }
+        
+        .section-header { margin-bottom: 12px; border-bottom: 2.5px solid var(--brand); padding-bottom: 8px; }
+        .cat-name { font-size: 24px; font-weight: 800; color: var(--brand); }
+
+        .hero-banner { width: 100%; height: 280px; margin-bottom: 20px; overflow: hidden; border-radius: 4px; }
+        .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-list { display: flex; flex-direction: column; gap: 20px; }
+        .hero-item { display: flex; gap: 30px; height: 260px; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .hero-item .img-box { width: 260px; height: 260px; border: 1px solid #eee; flex-shrink: 0; }
+        .hero-item .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 30px; margin-top: 5px; }
+        .grid-box { display: flex; flex-direction: column; }
+        .grid-box .img-box { width: 100%; aspect-ratio: 1 / 1; border: 1px solid #eee; margin-bottom: 8px; }
+        .img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .info { text-align: left; display: flex; flex-direction: column; gap: 2px; }
+        .line-1 { font-size: 13px; font-weight: 600; color: var(--brand); display: flex; gap: 6px; } 
+        .line-1 .num { color: #000; font-weight: 800; }
+        .line-1 .origin { color: #999; font-weight: 400; }
+        
+        .hero-item .line-2 { font-size: 18px; font-weight: 800; color: #111; line-height: 1.3; margin: 2px 0; }
+        .grid-box .line-2 { 
+            font-size: 18px; 
+            font-weight: 800; 
+            color: #111; 
+            line-height: 1.25; 
+            min-height: 46px; 
+            display: flex;
+            align-items: center; 
+            overflow: hidden; 
+            margin: 1px 0; 
+        }
+        
+        .line-3 { display: flex; align-items: baseline; gap: 8px; }
+        .original-prc { font-size: 15px; color: var(--gray); text-decoration: line-through; }
+        .current-prc { font-size: 24px; font-weight: 900; color: var(--red); }
+        .discount-rate { font-size: 19px; font-weight: 800; color: #d35400; }
+        .line-4 { font-size: 11px; color: #666; border-top: 1px solid #f5f5f5; padding-top: 5px; min-height: 32px; height: auto; line-height: 1.35; overflow: visible; word-break: keep-all; }
+
+        .page-no { position: absolute; bottom: 10mm; right: 10mm; font-weight: bold; color: var(--brand); }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">08 견과/버섯/잡곡</span></div>
+        <div class="hero-banner"><img src="https://jkimage.com/data/link/%EC%84%A4%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%83%88%20%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC/%EA%B2%AC%EA%B3%BC%EB%B2%84%EC%84%AF%EC%9E%A1%EA%B3%A1.png"></div>
+        <div class="hero-list">
+            <div class="hero-item">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/hwr48S.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">32-1</span> [해울림] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[해울림] 나눔 견과 선물세트 3호</div>
+                    <div class="line-3"><span class="original-prc">68,000</span><span class="current-prc">27,000</span><span class="discount-rate">60%</span></div>
+                    <div class="line-4">구성: 아몬드 200g, 호두 110g, 해바라기씨 200g, 크랜베리 180g</div>
+                </div>
+            </div>
+            <div class="hero-item">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/hwr50S.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">32-2</span> [해울림] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[해울림] 나눔 견과 선물세트 5호</div>
+                    <div class="line-3"><span class="original-prc">90,000</span><span class="current-prc">29,000</span><span class="discount-rate">68%</span></div>
+                    <div class="line-4">구성: 아몬드 200g, 호두 110g, 캐슈넛 200g, 피스타치오 170g</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">32</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">08 견과/버섯/잡곡</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/hwr51S.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">33-1</span> [해울림] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[해울림] 나눔 견과 선물세트 6호</div>
+                    <div class="line-3"><span class="original-prc">74,000</span><span class="current-prc">37,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 아몬드 200g, 호두 110g, 해바라기씨 200g, 크랜베리 180g, 피스타치오 170g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/hwr53S.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">33-2</span> [해울림] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[해울림] 나눔 견과 선물세트 8호</div>
+                    <div class="line-3"><span class="original-prc">92,000</span><span class="current-prc">46,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 아몬드 200g, 호두 110g, 해바라기씨 200g, 크랜베리 180g 등</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://faps.mycafe24.com/gift/2025/600/JGW_56S.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">33-3</span> [정과원] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[정과원] 버라이어티 견과 선물세트 秀(수)</div>
+                    <div class="line-3"><span class="original-prc">108,000</span><span class="current-prc">54,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 구운아몬드 300g, 호두 200g, 브라질너트 300g, 피칸 200g 등</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2024/600/hwr108S.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">33-4</span> [해울림] <span class="origin">국산 외</span></div>
+                    <div class="line-2">[해울림] 품격을 더한 프리미엄 선물세트 1호</div>
+                    <div class="line-3"><span class="original-prc">110,000</span><span class="current-prc">55,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 표고슬라이스 35g×2, 화고 40g×2, 세멸 140g, 소멸 120g 등</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">33</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">08 견과/버섯/잡곡</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="https://spng1.cafe24.com/gift/2020/500/Dumemaru_jabgokset_04_500.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">34-1</span> [보약밥상] <span class="origin">국산</span></div>
+                    <div class="line-2">[보약밥상] 고품격 잡곡 선물세트-국</div>
+                    <div class="line-3"><span class="original-prc">64,000</span><span class="current-prc">32,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 발아현미300g, 발아찰현미300g, 찰현미300g, 현미300g 등</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://sitem.ssgcdn.com/78/25/97/item/1000554972578_i1_500.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">34-2</span> [보약밥상] <span class="origin">국산</span></div>
+                    <div class="line-2">[보약밥상] 고품격 잡곡 선물세트-하</div>
+                    <div class="line-3"><span class="original-prc">66,000</span><span class="current-prc">33,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 햅쌀(고시히카리,밀키퀸)1.5kg,발아현미400g,발아귀리350g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2022/600/Dumemaru_HS-japgokset-MP_600.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">34-3</span> [米味] <span class="origin">국산</span></div>
+                    <div class="line-2">[米味] 고품격 햅쌀&잡곡 명품 선물세트</div>
+                    <div class="line-3"><span class="original-prc">84,000</span><span class="current-prc">42,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 햅쌀(고시히카리,밀키퀸)1.2kg×2ea,발아찰현미300g,발아흑미300g</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/Dumemaru_jabgokset_02_500.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">34-4</span> [米味] <span class="origin">국산</span></div>
+                    <div class="line-2">[米味]고품격 고시히카리&가바 잡곡<br>선물세트</div>
+                    <div class="line-3"><span class="original-prc">100,000</span><span class="current-prc">50,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 햅쌀1.2kgx2,가바현미1.2kgx1,발아찰현미300g,발아흑미300g</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">34</div>
+    </div>
+
+    <div class="page">
+        <div class="section-header"><span class="cat-name">08 견과/버섯/잡곡</span></div>
+        <div class="grid-container">
+            <div class="grid-box">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/Dumemaru_chuseokset_02_500.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">35-1</span> [보약밥상] <span class="origin">국산</span></div>
+                    <div class="line-2">[보약밥상] 표고버섯 선물세트-천</div>
+                    <div class="line-3"><span class="original-prc">98,000</span><span class="current-prc">49,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 흑화고80g내외×2입,슬라이스표고90g×1입</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://psfa.cafe24.com/gift/2023/600/YJPG_09_600.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">35-2</span> [영진표고] <span class="origin">국산</span></div>
+                    <div class="line-2">[영진표고] 건강버섯 혼합 선물세트</div>
+                    <div class="line-3"><span class="original-prc">102,000</span><span class="current-prc">51,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 표고 100g, 표고채 60g, 버섯3종 10g×2, 분말 등</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="https://shop-phinf.pstatic.net/20241226_29/1735180889137oCXxL_JPEG/8000943287100710_842114075.jpg?type=m1000_pd" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">35-3</span> [기품맛담] <span class="origin">국산</span></div>
+                    <div class="line-2">[기품맛담] 무농약 참송화버섯 이코노미 선물세트 1kg</div>
+                    <div class="line-3"><span class="original-prc">106,000</span><span class="current-prc">53,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 참송화버섯 1kg/28~30개</div>
+                </div>
+            </div>
+            <div class="grid-box">
+                <div class="img-box"><img src="http://spng1.cafe24.com/gift/2020/500/premium_4gunjaset_500.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
+                <div class="info">
+                    <div class="line-1"><span class="num">35-4</span> [名家] <span class="origin">국산외</span></div>
+                    <div class="line-2">[名家] 프리미엄 사군자 표고버섯 세트</div>
+                    <div class="line-3"><span class="original-prc">120,000</span><span class="current-prc">60,000</span><span class="discount-rate">50%</span></div>
+                    <div class="line-4">구성: 표고버섯120g×2,표고버섯슬라이스100g×2</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-no">35</div>
+    </div>
+
+    <div class="page full-img-page"><img src="https://jkimage.com/data/link/%EC%84%A4%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80/2026%20%EC%84%A4%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B802-2.png"></div>
+  
+  <div id="quotation-sidebar" style="position: fixed; top: 10px; right: 10px; width: 340px; background: #fff; border: 2px solid #8d705c; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 9999; font-family: 'Pretendard', sans-serif; display: flex; flex-direction: column; max-height: 90vh;">
+    <div style="background: #8d705c; color: white; padding: 15px; border-radius: 9px 9px 0 0; text-align: center;">
+        <h3 style="margin: 0; font-size: 18px;">📋 수량 선택 견적서</h3>
+    </div>
+    
+    <div id="quotation-list" style="padding: 15px; overflow-y: auto; flex-grow: 1; font-size: 13px;">
+        <p id="empty-msg" style="color: #999; text-align: center; padding: 20px 0;">상품을 클릭하면 담깁니다.</p>
+        <table style="width: 100%; border-collapse: collapse; display: none;" id="quote-table">
+            <thead>
+                <tr style="border-bottom: 2px solid #eee; text-align: left; font-size: 12px; color: #666;">
+                    <th style="padding: 8px 0;">상품명</th>
+                    <th style="text-align: center; width: 60px;">수량</th>
+                    <th style="text-align: right; width: 80px;">금액</th>
+                </tr>
+            </thead>
+            <tbody id="quote-body"></tbody>
+        </table>
+    </div>
+
+    <div style="padding: 15px; background: #f9f9f9; border-top: 1px solid #eee; border-radius: 0 0 12px 12px;">
+        <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 18px; margin-bottom: 10px;">
+            <span>총 견적액</span>
+            <span style="color: #b33939;"><span id="total-price-display">0</span>원</span>
+        </div>
+        <button onclick="copyToClipboard()" style="width: 100%; background: #8d705c; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 700;">견적 내역 복사하기</button>
+    </div>
+</div>
+
+<script>
+    let basket = {}; 
+
+    // 페이지 로드 시 모든 상품 박스에 자동 클릭 기능 부여
+    window.onload = function() {
+        const productBoxes = document.querySelectorAll('.grid-box, .hero-item');
+        productBoxes.forEach(box => {
+            box.style.cursor = 'pointer';
+            box.addEventListener('click', function() {
+                // 상품명과 가격 추출
+                const nameEl = this.querySelector('.line-2');
+                const priceEl = this.querySelector('.current-prc');
+                
+                if (nameEl && priceEl) {
+                    const name = nameEl.innerText.split('\n')[0].trim();
+                    const price = parseInt(priceEl.innerText.replace(/,/g, ''));
+                    addItem(name, price);
+                }
+            });
+        });
+    };
+
+    function addItem(name, price) {
+        if (basket[name]) {
+            basket[name].count++;
+        } else {
+            basket[name] = { price: price, count: 1 };
+        }
+        renderQuote();
+    }
+
+    function changeCount(name, delta) {
+        basket[name].count += delta;
+        if (basket[name].count <= 0) delete basket[name];
+        renderQuote();
+    }
+
+    function renderQuote() {
+        const body = document.getElementById('quote-body');
+        const table = document.getElementById('quote-table');
+        const empty = document.getElementById('empty-msg');
+        let total = 0;
+        
+        body.innerHTML = '';
+        const keys = Object.keys(basket);
+
+        if (keys.length === 0) {
+            table.style.display = 'none';
+            empty.style.display = 'block';
+            document.getElementById('total-price-display').innerText = '0';
+            return;
+        }
+
+        table.style.display = 'table';
+        empty.style.display = 'none';
+
+        keys.forEach(name => {
+            const item = basket[name];
+            const sum = item.price * item.count;
+            total += sum;
+
+            const row = body.insertRow();
+            row.innerHTML = `
+                <td style="padding: 10px 0; border-bottom: 1px solid #eee;">
+                    <strong>${name}</strong><br>
+                    <span style="color:#999; font-size:11px;">${item.price.toLocaleString()}원</span>
+                </td>
+                <td style="text-align: center; border-bottom: 1px solid #eee;">
+                    <div style="display:flex; align-items:center; justify-content:center; gap:5px;">
+                        <button onclick="event.stopPropagation(); changeCount('${name}', -1)" style="border:1px solid #ddd; background:#fff; width:22px; height:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;">-</button>
+                        <span style="min-width:15px;">${item.count}</span>
+                        <button onclick="event.stopPropagation(); changeCount('${name}', 1)" style="border:1px solid #ddd; background:#fff; width:22px; height:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;">+</button>
+                    </div>
+                </td>
+                <td style="text-align: right; border-bottom: 1px solid #eee; font-weight:700;">
+                    ${sum.toLocaleString()}원
+                </td>
+            `;
+        });
+        document.getElementById('total-price-display').innerText = total.toLocaleString();
+    }
+
+    function copyToClipboard() {
+        const keys = Object.keys(basket);
+        if (keys.length === 0) return alert("선택된 상품이 없습니다.");
+        
+        let text = "[[ 2026 설 선물 견적서 ]]\n\n";
+        let total = 0;
+        keys.forEach((name, idx) => {
+            const item = basket[name];
+            const sum = item.price * item.count;
+            text += `${idx + 1}. ${name}\n   수량: ${item.count}개 / 금액: ${sum.toLocaleString()}원\n`;
+            total += sum;
+        });
+        text += `\n──────────────────\n총 견적 합계: ${total.toLocaleString()}원`;
+        
+        const tempElem = document.createElement('textarea');
+        tempElem.value = text;
+        document.body.appendChild(tempElem);
+        tempElem.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempElem);
+        alert("견적 내역이 복사되었습니다! 메신저나 엑셀에 붙여넣으세요.");
+    }
+</script>
+
+</body>
+</html>
