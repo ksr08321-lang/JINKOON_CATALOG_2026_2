@@ -2041,6 +2041,29 @@
         alert("견적 내역이 복사되었습니다! 메신저나 엑셀에 붙여넣으세요.");
     }
 </script>
+<script>
+    // 페이지 내의 모든 상품 박스를 다시 찾아 클릭 기능을 연결하는 함수
+    function fixBasket() {
+        const boxes = document.querySelectorAll('.grid-box, .hero-item');
+        boxes.forEach(box => {
+            box.style.cursor = 'pointer';
+            box.onclick = function() {
+                const nameEl = this.querySelector('.line-2');
+                const priceEl = this.querySelector('.current-prc');
+                if (nameEl && priceEl) {
+                    const name = nameEl.innerText.split('\n')[0].trim();
+                    const price = parseInt(priceEl.innerText.replace(/,/g, ''));
+                    addItem(name, price);
+                }
+            };
+        });
+    }
 
+    // 문서 로딩이 끝난 후와 1초 뒤에 한 번 더 실행 (중복 태그 오류 방지)
+    window.addEventListener('load', fixBasket);
+    setTimeout(fixBasket, 1000);
+</script>
+    
 </body>
+
 </html>
