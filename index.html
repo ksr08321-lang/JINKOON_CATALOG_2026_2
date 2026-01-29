@@ -1939,25 +1939,7 @@
 <script>
     let basket = {}; 
 
-    // 페이지 로드 시 모든 상품 박스에 자동 클릭 기능 부여
-    window.onload = function() {
-        const productBoxes = document.querySelectorAll('.grid-box, .hero-item');
-        productBoxes.forEach(box => {
-            box.style.cursor = 'pointer';
-            box.addEventListener('click', function() {
-                // 상품명과 가격 추출
-                const nameEl = this.querySelector('.line-2');
-                const priceEl = this.querySelector('.current-prc');
-                
-                if (nameEl && priceEl) {
-                    const name = nameEl.innerText.split('\n')[0].trim();
-                    const price = parseInt(priceEl.innerText.replace(/,/g, ''));
-                    addItem(name, price);
-                }
-            });
-        });
-    };
-
+    // 상품 추가 함수
     function addItem(name, price) {
         if (basket[name]) {
             basket[name].count++;
@@ -1967,12 +1949,14 @@
         renderQuote();
     }
 
+    // 수량 조절 함수
     function changeCount(name, delta) {
         basket[name].count += delta;
         if (basket[name].count <= 0) delete basket[name];
         renderQuote();
     }
 
+    // 견적서 렌더링
     function renderQuote() {
         const body = document.getElementById('quote-body');
         const table = document.getElementById('quote-table');
@@ -2005,9 +1989,9 @@
                 </td>
                 <td style="text-align: center; border-bottom: 1px solid #eee;">
                     <div style="display:flex; align-items:center; justify-content:center; gap:5px;">
-                        <button onclick="event.stopPropagation(); changeCount('${name}', -1)" style="border:1px solid #ddd; background:#fff; width:22px; height:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;">-</button>
+                        <button onclick="event.stopPropagation(); changeCount('${name}', -1)" style="border:1px solid #ddd; background:#fff; width:22px; height:22px; cursor:pointer;">-</button>
                         <span style="min-width:15px;">${item.count}</span>
-                        <button onclick="event.stopPropagation(); changeCount('${name}', 1)" style="border:1px solid #ddd; background:#fff; width:22px; height:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;">+</button>
+                        <button onclick="event.stopPropagation(); changeCount('${name}', 1)" style="border:1px solid #ddd; background:#fff; width:22px; height:22px; cursor:pointer;">+</button>
                     </div>
                 </td>
                 <td style="text-align: right; border-bottom: 1px solid #eee; font-weight:700;">
@@ -2018,6 +2002,7 @@
         document.getElementById('total-price-display').innerText = total.toLocaleString();
     }
 
+    // 클립보드 복사
     function copyToClipboard() {
         const keys = Object.keys(basket);
         if (keys.length === 0) return alert("선택된 상품이 없습니다.");
@@ -2038,19 +2023,21 @@
         tempElem.select();
         document.execCommand('copy');
         document.body.removeChild(tempElem);
-        alert("견적 내역이 복사되었습니다! 메신저나 엑셀에 붙여넣으세요.");
+        alert("견적 내역이 복사되었습니다!");
     }
-</script>
-<script>
-    // 페이지 내의 모든 상품 박스를 다시 찾아 클릭 기능을 연결하는 함수
-    function fixBasket() {
-        const boxes = document.querySelectorAll('.grid-box, .hero-item');
-        boxes.forEach(box => {
+
+    // [핵심] 이벤트 리스너 중복 방지를 위한 초기화 및 등록 함수
+    function initProductEvents() {
+        const productBoxes = document.querySelectorAll('.grid-box, .hero-item');
+        productBoxes.forEach(box => {
             box.style.cursor = 'pointer';
+            // 기존에 걸려있을지 모르는 이벤트를 완전히 제거하고 새로 등록
             box.onclick = function() {
                 const nameEl = this.querySelector('.line-2');
                 const priceEl = this.querySelector('.current-prc');
+                
                 if (nameEl && priceEl) {
+                    // 상품명에서 불필요한 공백 및 줄바꿈 제거
                     const name = nameEl.innerText.split('\n')[0].trim();
                     const price = parseInt(priceEl.innerText.replace(/,/g, ''));
                     addItem(name, price);
@@ -2059,11 +2046,11 @@
         });
     }
 
-    // 문서 로딩이 끝난 후와 1초 뒤에 한 번 더 실행 (중복 태그 오류 방지)
-    window.addEventListener('load', fixBasket);
-    setTimeout(fixBasket, 1000);
+    // 페이지 로드 시 한 번만 실행
+    window.addEventListener('DOMContentLoaded', initProductEvents);
 </script>
     
 </body>
 
 </html>
+
